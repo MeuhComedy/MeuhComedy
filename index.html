@@ -109,7 +109,7 @@
   <div class="section-label">Agenda</div>
   <h2>Prochaines dates</h2>
   <div class="dates-grid" id="dates-list"></div>
-  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur réservation via Billetweb</p>
+  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
 </section>
 
 <section id="about">
@@ -117,7 +117,7 @@
   <h2>C'est quoi le Meuh ?</h2>
   <div class="about-grid">
     <div class="about-card"><div class="about-icon">🎤</div><h3>Open Mics</h3><p id="txt-openmics">Des soirées ouvertes à tous les humoristes, du débutant au confirmé. 5 à 10 minutes pour convaincre.</p></div>
-    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 7-8 minutes.</p></div>
+    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 20 minutes minimum.</p></div>
     <div class="about-card"><div class="about-icon">📍</div><h3>Ancré à Rennes</h3><p id="txt-rennes">4 bars partenaires, une communauté locale, et une vraie scène stand-up qui grandit depuis avril 2025.</p></div>
     <div class="about-card"><div class="about-icon">🚀</div><h3>Tremplin artistes</h3><p id="txt-tremplin">On accompagne les humoristes rennais à développer leur écriture et leur présence scénique.</p></div>
   </div>
@@ -133,7 +133,7 @@
   <div class="section-label">Contact</div>
   <h2>Nous rejoindre</h2>
   <div class="contact-grid">
-    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus. Contacte-nous sur Instagram.</p><br><span style="color:#F5A623;font-size:14px;">&#64;meuhcomedy</span></div>
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
     <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
   </div>
   <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
@@ -160,7 +160,7 @@
     <div id="adminLogin" style="padding:1.5rem;">
       <p style="color:#777;font-size:14px;margin-bottom:1.25rem;">Accès réservé — entrez le mot de passe</p>
       <span class="af-lbl">Mot de passe</span>
-      <input type="password" id="pwInput" class="af-inp" placeholder="mot de passe" onkeydown="if(event.key==='Enter')checkPw()">
+      <input type="password" id="pwInput" class="af-inp" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
       <button class="admin-btn" onclick="checkPw()">Connexion</button>
       <p id="pwErr" style="color:#ff6b6b;font-size:13px;margin-top:8px;"></p>
     </div>
@@ -205,43 +205,19 @@
 
 <script>
 const ADMIN_PW = 'meuh2025';
-const STORAGE_KEY = 'meuhcomedy_data';
+const BIN_ID = '69dbb0b936566621a8a5fd9f';
+const API_KEY = '$2a$10$af1KclFEI4tzwUq2JWKCcu9X79FdelzAnjHsrNwug1/37SN8ICA/m';
+const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
 let isLoggedIn = false;
+let events = [], lieux = [], textes = {};
 
-const DEFAULT_DATA = {
-  events: [],
-  lieux: [
-    {nom:'Nebula', adresse:'2 Rue Saint-Melaine, Rennes'},
-    {nom:'Little Beetles', adresse:'8 Rue Jean Sauveur, Rennes'},
-    {nom:'Tête de Chou', adresse:'15 Rue Kléber, Rennes'},
-    {nom:'Sketch', adresse:'36 Mail François Mitterrand, Rennes'}
-  ],
-  textes: {
-    accroche: 'Le stand-up rennais qui décoiffe. Open mics, plateaux et découverte des humoristes de demain.',
-    openmics: 'Des soirées ouvertes à tous les humoristes, du débutant au confirmé. 5 à 10 minutes pour convaincre.',
-    plateaux: 'Des spectacles construits avec des artistes sélectionnés pour des passages de 20 minutes minimum.',
-    rennes: '4 bars partenaires, une communauté locale, et une vraie scène stand-up qui grandit depuis avril 2025.',
-    tremplin: 'On accompagne les humoristes rennais à développer leur écriture et leur présence scénique.'
-  }
-};
-
-function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
-}
-
-function saveData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({events, lieux, textes}));
-    showToast('✓ Sauvegardé');
-  } catch(e) {
-    showToast('❌ Erreur sauvegarde');
-  }
-}
+const DEFAULT_LIEUX = [
+  {nom:'Nebula', adresse:'2 Rue Saint-Melaine, Rennes'},
+  {nom:'Little Beetles', adresse:'8 Rue Jean Sauveur, Rennes'},
+  {nom:'Tête de Chou', adresse:'15 Rue Kléber, Rennes'},
+  {nom:'Sketch', adresse:'36 Mail François Mitterrand, Rennes'}
+];
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -250,10 +226,33 @@ function showToast(msg) {
   setTimeout(() => { t.style.display = 'none'; }, 1500);
 }
 
-const data = loadData();
-let events = data.events || [];
-let lieux = data.lieux || DEFAULT_DATA.lieux;
-let textes = data.textes || DEFAULT_DATA.textes;
+async function loadData() {
+  try {
+    const res = await fetch(API_URL + '/latest', { headers: { 'X-Master-Key': API_KEY } });
+    const json = await res.json();
+    const d = json.record;
+    events = d.events || [];
+    lieux = d.lieux || DEFAULT_LIEUX;
+    textes = d.textes || {};
+  } catch(e) {
+    console.warn('JSONBin indisponible');
+    lieux = DEFAULT_LIEUX;
+  }
+  applyTextes(); renderLieux(); renderDates();
+}
+
+async function saveData() {
+  try {
+    await fetch(API_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify({ events, lieux, textes })
+    });
+    showToast('✓ Sauvegardé');
+  } catch(e) {
+    showToast('❌ Erreur sauvegarde');
+  }
+}
 
 function goTo(id) { const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
 
@@ -286,9 +285,7 @@ function removeEvent(i) { const sorted=[...events].sort((a,b)=>new Date(a.date)-
 function loadTexteFields() { document.getElementById('te-accroche').value=textes.accroche||''; document.getElementById('te-openmics').value=textes.openmics||''; document.getElementById('te-plateaux').value=textes.plateaux||''; document.getElementById('te-rennes').value=textes.rennes||''; document.getElementById('te-tremplin').value=textes.tremplin||''; }
 function saveTextes() { textes.accroche=document.getElementById('te-accroche').value.trim(); textes.openmics=document.getElementById('te-openmics').value.trim(); textes.plateaux=document.getElementById('te-plateaux').value.trim(); textes.rennes=document.getElementById('te-rennes').value.trim(); textes.tremplin=document.getElementById('te-tremplin').value.trim(); applyTextes(); saveData(); }
 
-applyTextes();
-renderLieux();
-renderDates();
+loadData();
 </script>
 </body>
 </html>
