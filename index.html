@@ -112,7 +112,7 @@
   <div class="section-label">Agenda</div>
   <h2>Prochaines dates</h2>
   <div class="dates-grid" id="dates-list"><div class="empty-msg">Chargement...</div></div>
-  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur réservation via Billetweb</p>
+  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
 </section>
 
 <section id="about">
@@ -120,7 +120,7 @@
   <h2>C'est quoi le Meuh ?</h2>
   <div class="about-grid">
     <div class="about-card"><div class="about-icon">🎤</div><h3>Open Mics</h3><p id="txt-openmics">Des soirées ouvertes à tous les humoristes, du débutant au confirmé. 5 à 10 minutes pour convaincre.</p></div>
-    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 7 minutes minimum.</p></div>
+    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 20 minutes minimum.</p></div>
     <div class="about-card"><div class="about-icon">📍</div><h3>Ancré à Rennes</h3><p id="txt-rennes">4 bars partenaires, une communauté locale, et une vraie scène stand-up qui grandit depuis avril 2025.</p></div>
     <div class="about-card"><div class="about-icon">🚀</div><h3>Tremplin artistes</h3><p id="txt-tremplin">On accompagne les humoristes rennais à développer leur écriture et leur présence scénique.</p></div>
   </div>
@@ -136,7 +136,7 @@
   <div class="section-label">Contact</div>
   <h2>Nous rejoindre</h2>
   <div class="contact-grid">
-    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus. Contacte-nous sur Instagram</p><br><span style="color:#F5A623;font-size:14px;">&#64;meuhcomedy</span></div>
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
     <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
   </div>
   <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
@@ -164,7 +164,7 @@
     <div id="adminLogin" style="padding:1.5rem;">
       <p style="color:#777;font-size:14px;margin-bottom:1.25rem;">Accès réservé — entrez le mot de passe</p>
       <span class="af-lbl">Mot de passe</span>
-      <input type="password" id="pwInput" class="af-inp" placeholder="motdepasse" onkeydown="if(event.key==='Enter')checkPw()">
+      <input type="password" id="pwInput" class="af-inp" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
       <button class="admin-btn" onclick="checkPw()">Connexion</button>
       <p id="pwErr" style="color:#ff6b6b;font-size:13px;margin-top:8px;"></p>
     </div>
@@ -211,7 +211,7 @@
 const BIN_ID = '69dbb0b936566621a8a5fd9f';
 const API_KEY = '$2a$10$af1KclFEI4tzwUq2JWKCcu9X79FdelzAnjHsrNwug1/37SN8ICA/m';
 const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-const ADMIN_PW = 'meuhcomedy2018';
+const ADMIN_PW = 'meuh2025';
 const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
 let isLoggedIn = false;
 let lieux = [];
@@ -225,36 +225,49 @@ async function loadData() {
     const res = await fetch(API_URL + '/latest', {
       headers: { 'X-Master-Key': API_KEY }
     });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     const data = json.record;
     events = data.events || [];
     lieux = data.lieux || [];
     textes = data.textes || {};
-    applyTextes();
-    renderLieux();
-    renderDates();
   } catch(e) {
-    console.error('Erreur chargement:', e);
+    console.warn('JSONBin indisponible, mode local:', e.message);
+    // Charger depuis localStorage si disponible
+    try {
+      const local = localStorage.getItem('meuhcomedy_data');
+      if (local) {
+        const data = JSON.parse(local);
+        events = data.events || [];
+        lieux = data.lieux || [];
+        textes = data.textes || {};
+      }
+    } catch(e2) {}
   }
+  applyTextes();
+  renderLieux();
+  renderDates();
 }
 
 async function saveData() {
   const indicator = document.getElementById('savingIndicator');
   indicator.style.display = 'block';
+  const payload = { events, lieux, textes };
+  // Toujours sauvegarder en local d'abord
+  try { localStorage.setItem('meuhcomedy_data', JSON.stringify(payload)); } catch(e) {}
+  // Puis essayer JSONBin
   try {
-    await fetch(API_URL, {
+    const res = await fetch(API_URL, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': API_KEY
-      },
-      body: JSON.stringify({ events, lieux, textes })
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify(payload)
     });
-    setTimeout(() => { indicator.style.display = 'none'; }, 1500);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    indicator.textContent = '✓ Sauvegardé';
   } catch(e) {
-    indicator.textContent = '❌ Erreur sauvegarde';
-    setTimeout(() => { indicator.style.display = 'none'; indicator.textContent = '💾 Sauvegarde...'; }, 2000);
+    indicator.textContent = '✓ Sauvegardé en local';
   }
+  setTimeout(() => { indicator.style.display = 'none'; indicator.textContent = '💾 Sauvegarde...'; }, 1500);
 }
 
 function applyTextes() {
