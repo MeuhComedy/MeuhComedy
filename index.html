@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meuh Comedy — Stand-up Rennes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; color: #fff; font-family: 'DM Sans', sans-serif; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; border-bottom: 1px solid #222; position: sticky; top: 0; background: #111; z-index: 100; }
+    .nav-logo { font-family: 'Boogaloo', cursive; font-size: 26px; color: #fff; letter-spacing: 1px; text-decoration: none; }
+    .nav-logo span { color: #F5A623; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #aaa; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
+    .nav-links a:hover { color: #F5A623; }
+    .hero { padding: 5rem 2rem 4rem; text-align: center; border-bottom: 1px solid #222; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%); pointer-events: none; }
+    .hero-tag { display: inline-block; background: #F5A623; color: #111; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Boogaloo', cursive; font-size: clamp(64px, 14vw, 120px); line-height: 0.95; color: #fff; letter-spacing: 1px; }
+    .hero h1 span { color: #F5A623; }
+    .hero-sub { font-size: 16px; color: #888; margin: 1.5rem auto 2.5rem; max-width: 420px; line-height: 1.6; }
+    .btn { display: inline-block; background: #F5A623; color: #111; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 30px; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid #444; margin-left: 12px; font-family: 'DM Sans', sans-serif; }
+    section { padding: 3.5rem 2rem; border-bottom: 1px solid #222; max-width: 860px; margin: 0 auto; }
+    .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #F5A623; font-weight: 500; margin-bottom: 0.5rem; }
+    section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 2rem; color: #fff; }
+    .dates-grid { display: flex; flex-direction: column; gap: 12px; }
+    .date-card { display: flex; align-items: center; gap: 1.5rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1rem 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s; }
+    .date-card:hover { border-color: #F5A623; }
+    .date-day { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #F5A623; line-height: 1; min-width: 48px; text-align: center; }
+    .date-month { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    .date-sep { width: 1px; height: 36px; background: #2a2a2a; flex-shrink: 0; }
+    .date-info { flex: 1; min-width: 0; }
+    .date-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+    .date-venue { font-size: 13px; color: #666; }
+    .date-badge { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: #F5A623; color: #111; white-space: nowrap; flex-shrink: 0; }
+    .date-badge.open-mic { background: transparent; border: 1px solid #444; color: #aaa; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1.25rem; }
+    .about-icon { font-size: 24px; margin-bottom: 0.75rem; }
+    .about-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; color: #F5A623; }
+    .about-card p { font-size: 13px; color: #999; line-height: 1.6; }
+    .lieux-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .lieu { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: flex-start; gap: 12px; }
+    .lieu-dot { width: 10px; height: 10px; border-radius: 50%; background: #F5A623; flex-shrink: 0; margin-top: 4px; }
+    .lieu-name { font-size: 14px; font-weight: 500; color: #fff; }
+    .lieu-addr { font-size: 12px; color: #666; margin-top: 2px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1.25rem; }
+    .contact-card h3 { font-size: 14px; color: #aaa; font-weight: 400; margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: #ddd; }
+    .contact-card a { color: #F5A623; text-decoration: none; font-size: 14px; }
+    footer { padding: 2rem; text-align: center; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; }
+    footer a { color: #666; text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: #F5A623; }
+    /* ADMIN */
+    .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; align-items: center; justify-content: center; }
+    .admin-overlay.open { display: flex; }
+    .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 460px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
+    .admin-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #252525; display: flex; justify-content: space-between; align-items: center; }
+    .admin-header span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #F5A623; letter-spacing: 1px; }
+    .admin-close { background: #F5A623; color: #111; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 16px; font-weight: 700; cursor: pointer; }
+    .admin-tabs { display: flex; background: #141414; border-bottom: 1px solid #252525; }
+    .admin-tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; transition: color 0.15s; }
+    .admin-tab.active { color: #F5A623; border-bottom: 2px solid #F5A623; background: #181818; }
+    .admin-content { padding: 1.25rem 1.5rem; overflow-y: auto; flex: 1; }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+    .af-lbl { font-size: 11px; color: #F5A623; display: block; margin-bottom: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+    .af-inp, .af-sel, .af-ta { display: block; width: 100%; background: #222; border: 1px solid #444; border-radius: 8px; color: #F5A623; padding: 9px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 12px; box-sizing: border-box; }
+    .af-sel { appearance: none; -webkit-appearance: none; }
+    .af-ta { resize: vertical; min-height: 70px; }
+    .af-inp:focus, .af-sel:focus, .af-ta:focus { border-color: #F5A623; }
+    .af-inp::placeholder { color: #444; }
+    .admin-btn { display: block; width: 100%; background: #181818; color: #F5A623; border: 2px solid #F5A623; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
+    .admin-btn:hover { background: #F5A623; color: #111; }
+    .admin-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+    .admin-item { background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .admin-item-del { background: #2a2a2a; border: none; color: #888; cursor: pointer; width: 26px; height: 26px; border-radius: 6px; font-size: 12px; flex-shrink: 0; }
+    .admin-item-del:hover { background: #c0392b; color: #fff; }
+    .admin-sep { font-size: 11px; color: #F5A623; text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.75rem; padding-bottom: 6px; border-bottom: 1px solid #252525; font-weight: 500; }
+    .empty-msg { color: #444; font-size: 13px; text-align: center; padding: 1.5rem; border: 1px dashed #2a2a2a; border-radius: 8px; }
+    @media (max-width: 600px) {
+      .about-grid, .lieux-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Meuh <span>Comedy</span></a>
+  <ul class="nav-links">
+    <li><a onclick="goTo('dates')">Dates</a></li>
+    <li><a onclick="goTo('about')">Le projet</a></li>
+    <li><a onclick="goTo('lieux')">Lieux</a></li>
+    <li><a onclick="goTo('contact')">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <svg style="display:inline-block;width:56px;height:56px;margin-bottom:1.5rem;" viewBox="0 0 56 56" fill="none">
+    <rect x="20" y="4" width="16" height="26" rx="8" fill="#F5A623"/>
+    <path d="M10 28c0 9.94 8.06 18 18 18s18-8.06 18-18" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <line x1="28" y1="46" x2="28" y2="54" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="20" y1="54" x2="36" y2="54" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+  <div class="hero-tag">Stand-up · Rennes</div>
+  <h1>Meuh<br><span>Comedy</span></h1>
+  <p class="hero-sub" id="txt-accroche">Le stand-up rennais qui décoiffe. Open mics, plateaux et découverte des humoristes de demain.</p>
+  <button class="btn" onclick="goTo('dates')">Prochaines soirées</button>
+  <button class="btn btn-ghost" onclick="goTo('contact')">Nous rejoindre</button>
+</div>
+
+<section id="dates">
+  <div class="section-label">Agenda</div>
+  <h2>Prochaines dates</h2>
+  <div class="dates-grid" id="dates-list"></div>
+  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
+</section>
+
+<section id="about">
+  <div class="section-label">Le projet</div>
+  <h2>C'est quoi le Meuh ?</h2>
+  <div class="about-grid">
+    <div class="about-card"><div class="about-icon">🎤</div><h3>Open Mics</h3><p id="txt-openmics">Des soirées ouvertes à tous les humoristes, du débutant au confirmé. 5 à 10 minutes pour convaincre.</p></div>
+    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 20 minutes minimum.</p></div>
+    <div class="about-card"><div class="about-icon">📍</div><h3>Ancré à Rennes</h3><p id="txt-rennes">4 bars partenaires, une communauté locale, et une vraie scène stand-up qui grandit depuis avril 2025.</p></div>
+    <div class="about-card"><div class="about-icon">🚀</div><h3>Tremplin artistes</h3><p id="txt-tremplin">On accompagne les humoristes rennais à développer leur écriture et leur présence scénique.</p></div>
+  </div>
+</section>
+
+<section id="lieux">
+  <div class="section-label">Où nous trouver</div>
+  <h2>Nos lieux</h2>
+  <div class="lieux-grid" id="lieux-list"></div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2>Nous rejoindre</h2>
+  <div class="contact-grid">
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><a href="mailto:meuhcomedy@gmail.com">meuhcomedy@gmail.com</a></div>
+    <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><a href="mailto:meuhcomedy@gmail.com">meuhcomedy@gmail.com</a></div>
+  </div>
+  <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
+    <a href="https://instagram.com/meuhcomedy" target="_blank" class="btn" style="font-size:13px;padding:10px 22px;">Instagram</a>
+    <a href="https://linktr.ee/meuhcomedy" target="_blank" class="btn btn-ghost" style="font-size:13px;padding:10px 22px;">Billetterie</a>
+  </div>
+</section>
+
+<footer>
+  <p style="margin-bottom:8px;">
+    <a href="https://instagram.com/meuhcomedy" target="_blank">Instagram</a>
+    <a href="https://linktr.ee/meuhcomedy" target="_blank">Billetterie</a>
+  </p>
+  <p>© 2025 Meuh Comedy Rennais — Association loi 1901</p>
+  <p style="margin-top:1rem;"><span onclick="openAdmin()" style="color:#151515;font-size:10px;cursor:pointer;user-select:none;">⚙</span></p>
+</footer>
+
+<!-- ADMIN -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal">
+    <div class="admin-header">
+      <span>Administration</span>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div id="adminLogin" style="padding:1.5rem;">
+      <p style="color:#777;font-size:14px;margin-bottom:1.25rem;">Accès réservé — entrez le mot de passe</p>
+      <span class="af-lbl">Mot de passe</span>
+      <input type="password" id="pwInput" class="af-inp" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
+      <button class="admin-btn" onclick="checkPw()">Connexion</button>
+      <p id="pwErr" style="color:#ff6b6b;font-size:13px;margin-top:8px;"></p>
+    </div>
+    <div id="adminPanel" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
+      <div class="admin-tabs">
+        <button class="admin-tab active" id="tab-btn-dates" onclick="switchTab('dates')">📅 Dates</button>
+        <button class="admin-tab" id="tab-btn-lieux" onclick="switchTab('lieux')">📍 Lieux</button>
+        <button class="admin-tab" id="tab-btn-textes" onclick="switchTab('textes')">✏️ Textes</button>
+      </div>
+      <div class="admin-content">
+        <div class="admin-section active" id="tab-dates">
+          <div class="admin-list" id="admin-dates-list"></div>
+          <div class="admin-sep">Ajouter une date</div>
+          <span class="af-lbl">Date</span><input type="date" id="f-date" class="af-inp">
+          <span class="af-lbl">Bar</span><select id="f-bar" class="af-sel" onchange="fillAddr()"><option value="">— Choisir un bar —</option></select>
+          <span class="af-lbl">Adresse</span><input type="text" id="f-adresse" class="af-inp" readonly style="opacity:0.5;">
+          <span class="af-lbl">Heure</span><input type="text" id="f-heure" class="af-inp" placeholder="ex: 20h">
+          <span class="af-lbl">Type</span><select id="f-type" class="af-sel"><option value="plateau">Plateau</option><option value="open-mic">Open Mic</option><option value="autre">Autre</option></select>
+          <span class="af-lbl">Lien billetterie</span><input type="text" id="f-lien" class="af-inp" placeholder="https://linktr.ee/meuhcomedy">
+          <button class="admin-btn" onclick="addEvent()">+ Ajouter cette date</button>
+        </div>
+        <div class="admin-section" id="tab-lieux">
+          <div class="admin-list" id="admin-lieux-list"></div>
+          <div class="admin-sep">Ajouter un lieu</div>
+          <span class="af-lbl">Nom du bar</span><input type="text" id="l-nom" class="af-inp" placeholder="ex: Nebula">
+          <span class="af-lbl">Adresse</span><input type="text" id="l-adresse" class="af-inp" placeholder="ex: 2 Rue Saint-Melaine, Rennes">
+          <button class="admin-btn" onclick="addLieu()">+ Ajouter ce lieu</button>
+        </div>
+        <div class="admin-section" id="tab-textes">
+          <div class="admin-sep">Textes du site</div>
+          <span class="af-lbl">Accroche (hero)</span><textarea id="te-accroche" class="af-ta"></textarea>
+          <span class="af-lbl">Open Mics</span><textarea id="te-openmics" class="af-ta"></textarea>
+          <span class="af-lbl">Plateaux</span><textarea id="te-plateaux" class="af-ta"></textarea>
+          <span class="af-lbl">Ancré à Rennes</span><textarea id="te-rennes" class="af-ta"></textarea>
+          <span class="af-lbl">Tremplin artistes</span><textarea id="te-tremplin" class="af-ta"></textarea>
+          <button class="admin-btn" onclick="saveTextes()">💾 Sauvegarder les textes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+const ADMIN_PW='meuh2025';
+const MONTHS=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+let isLoggedIn=false;
+let lieux=[{nom:'Nebula',adresse:'2 Rue Saint-Melaine, Rennes'},{nom:'Little Beetles',adresse:'8 Rue Jean Sauveur, Rennes'},{nom:'Tête de Chou',adresse:'15 Rue Kléber, Rennes'},{nom:'Sketch',adresse:'36 Mail François Mitterrand, Rennes'}];
+let events=[];
+function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+function openAdmin(){document.getElementById('adminOverlay').classList.add('open');if(!isLoggedIn){document.getElementById('adminLogin').style.display='block';document.getElementById('adminPanel').style.display='none';}else{showPanel();}}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.getElementById('pwInput').value='';document.getElementById('pwErr').textContent='';}
+function checkPw(){if(document.getElementById('pwInput').value===ADMIN_PW){isLoggedIn=true;showPanel();}else{document.getElementById('pwErr').textContent='Mot de passe incorrect.';}}
+function showPanel(){document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='flex';refreshBarSelect();refreshAdminLieux();refreshAdminDates();loadTexteFields();}
+function switchTab(name){['dates','lieux','textes'].forEach(n=>{const btn=document.getElementById('tab-btn-'+n);const sec=document.getElementById('tab-'+n);const a=n===name;btn.classList.toggle('active',a);sec.classList.toggle('active',a);});}
+function renderLieux(){document.getElementById('lieux-list').innerHTML=lieux.map(l=>`<div class="lieu"><div class="lieu-dot"></div><div><div class="lieu-name">${l.nom}</div><div class="lieu-addr">${l.adresse}</div></div></div>`).join('');}
+function refreshBarSelect(){document.getElementById('f-bar').innerHTML='<option value="">— Choisir un bar —</option>'+lieux.map(l=>`<option value="${l.nom}" data-addr="${l.adresse}">${l.nom}</option>`).join('');}
+function refreshAdminLieux(){const list=document.getElementById('admin-lieux-list');if(!lieux.length){list.innerHTML='<div class="empty-msg">Aucun lieu.</div>';return;}list.innerHTML=lieux.map((l,i)=>`<div class="admin-item"><span style="color:#F5A623;font-weight:600;flex:0 0 auto;">${l.nom}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${l.adresse}</span><button class="admin-item-del" onclick="removeLieu(${i})">✕</button></div>`).join('');}
+function addLieu(){const nom=document.getElementById('l-nom').value.trim();const adresse=document.getElementById('l-adresse').value.trim();if(!nom){alert('Entrez un nom.');return;}lieux.push({nom,adresse});document.getElementById('l-nom').value='';document.getElementById('l-adresse').value='';renderLieux();refreshBarSelect();refreshAdminLieux();}
+function removeLieu(i){lieux.splice(i,1);renderLieux();refreshBarSelect();refreshAdminLieux();}
+function fillAddr(){const sel=document.getElementById('f-bar');document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||'';}
+function renderDates(){const list=document.getElementById('dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div style="color:#555;font-size:14px;text-align:center;padding:2rem;border:1px dashed #2a2a2a;border-radius:12px;">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;}list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join('');}
+function refreshAdminDates(){const list=document.getElementById('admin-dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;}list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join('');}
+function addEvent(){const date=document.getElementById('f-date').value;const bar=document.getElementById('f-bar').value;const adresse=document.getElementById('f-adresse').value.trim();const heure=document.getElementById('f-heure').value.trim();const type=document.getElementById('f-type').value;const lien=document.getElementById('f-lien').value.trim();if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;}events.push({date,bar,adresse,heure,type,lien});document.getElementById('f-date').value='';document.getElementById('f-bar').value='';document.getElementById('f-adresse').value='';document.getElementById('f-heure').value='';document.getElementById('f-lien').value='';renderDates();refreshAdminDates();}
+function removeEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));events=events.filter(e=>e!==sorted[i]);renderDates();refreshAdminDates();}
+function loadTexteFields(){[['te-accroche','txt-accroche'],['te-openmics','txt-openmics'],['te-plateaux','txt-plateaux'],['te-rennes','txt-rennes'],['te-tremplin','txt-tremplin']].forEach(([f,e])=>{const el=document.getElementById(e);if(el)document.getElementById(f).value=el.textContent;});}
+function saveTextes(){[['te-accroche','txt-accroche'],['te-openmics','txt-openmics'],['te-plateaux','txt-plateaux'],['te-rennes','txt-rennes'],['te-tremplin','txt-tremplin']].forEach(([f,e])=>{const val=document.getElementById(f).value.trim();const el=document.getElementById(e);if(el&&val)el.textContent=val;});alert('✓ Textes mis à jour !');}
+renderLieux();renderDates();
+</script>
+</body>
+</html>
