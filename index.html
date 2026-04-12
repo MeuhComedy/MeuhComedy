@@ -109,7 +109,7 @@
   <div class="section-label">Agenda</div>
   <h2>Prochaines dates</h2>
   <div class="dates-grid" id="dates-list"></div>
-  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
+  <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur réservation via Billetweb</p>
 </section>
 
 <section id="about">
@@ -117,7 +117,7 @@
   <h2>C'est quoi le Meuh ?</h2>
   <div class="about-grid">
     <div class="about-card"><div class="about-icon">🎤</div><h3>Open Mics</h3><p id="txt-openmics">Des soirées ouvertes à tous les humoristes, du débutant au confirmé. 5 à 10 minutes pour convaincre.</p></div>
-    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 20 minutes minimum.</p></div>
+    <div class="about-card"><div class="about-icon">🎭</div><h3>Plateaux</h3><p id="txt-plateaux">Des spectacles construits avec des artistes sélectionnés pour des passages de 7-8 minutes.</p></div>
     <div class="about-card"><div class="about-icon">📍</div><h3>Ancré à Rennes</h3><p id="txt-rennes">4 bars partenaires, une communauté locale, et une vraie scène stand-up qui grandit depuis avril 2025.</p></div>
     <div class="about-card"><div class="about-icon">🚀</div><h3>Tremplin artistes</h3><p id="txt-tremplin">On accompagne les humoristes rennais à développer leur écriture et leur présence scénique.</p></div>
   </div>
@@ -133,7 +133,7 @@
   <div class="section-label">Contact</div>
   <h2>Nous rejoindre</h2>
   <div class="contact-grid">
-    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus. Contacte-nous sur Instagram.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;meuhcomedy</span></div>
     <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
   </div>
   <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
@@ -160,7 +160,7 @@
     <div id="adminLogin" style="padding:1.5rem;">
       <p style="color:#777;font-size:14px;margin-bottom:1.25rem;">Accès réservé — entrez le mot de passe</p>
       <span class="af-lbl">Mot de passe</span>
-      <input type="password" id="pwInput" class="af-inp" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPw()">
+      <input type="password" id="pwInput" class="af-inp" placeholder="mot de passe" onkeydown="if(event.key==='Enter')checkPw()">
       <button class="admin-btn" onclick="checkPw()">Connexion</button>
       <p id="pwErr" style="color:#ff6b6b;font-size:13px;margin-top:8px;"></p>
     </div>
@@ -277,7 +277,7 @@ function addLieu() { const nom=document.getElementById('l-nom').value.trim(); co
 function removeLieu(i) { lieux.splice(i,1); renderLieux(); refreshBarSelect(); refreshAdminLieux(); saveData(); }
 function fillAddr() { const sel=document.getElementById('f-bar'); document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||''; }
 
-function renderDates() { const list=document.getElementById('dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;} list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join(''); }
+function renderDates() { const list=document.getElementById('dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.</div>';return;} list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join(''); }
 function refreshAdminDates() { const list=document.getElementById('admin-dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;} list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join(''); }
 function addEvent() { const date=document.getElementById('f-date').value; const bar=document.getElementById('f-bar').value; const adresse=document.getElementById('f-adresse').value.trim(); const heure=document.getElementById('f-heure').value.trim(); const type=document.getElementById('f-type').value; const lien=document.getElementById('f-lien').value.trim(); if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;} events.push({date,bar,adresse,heure,type,lien}); document.getElementById('f-date').value=''; document.getElementById('f-bar').value=''; document.getElementById('f-adresse').value=''; document.getElementById('f-heure').value=''; document.getElementById('f-lien').value=''; renderDates(); refreshAdminDates(); saveData(); }
 function removeEvent(i) { const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); events=events.filter(e=>e!==sorted[i]); renderDates(); refreshAdminDates(); saveData(); }
