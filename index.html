@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meuh Comedy — Stand-up Rennes</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,7 +21,7 @@
     .hero h1 span { color: #F5A623; }
     .hero-sub { font-size: 16px; color: #888; margin: 1.5rem auto 2.5rem; max-width: 420px; line-height: 1.6; }
     .btn { display: inline-block; background: #F5A623; color: #111; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 30px; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-    .btn-ghost { background: transparent; color: #fff; border: 1px solid #444; margin-left: 12px; font-family: 'DM Sans', sans-serif; }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid #444; margin-left: 12px; }
     section { padding: 3.5rem 2rem; border-bottom: 1px solid #222; max-width: 860px; margin: 0 auto; }
     .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #F5A623; font-weight: 500; margin-bottom: 0.5rem; }
     section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 2rem; color: #fff; }
@@ -55,7 +54,6 @@
     footer { padding: 2rem; text-align: center; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; }
     footer a { color: #666; text-decoration: none; margin: 0 8px; }
     footer a:hover { color: #F5A623; }
-    /* ADMIN */
     .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; align-items: center; justify-content: center; }
     .admin-overlay.open { display: flex; }
     .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 460px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
@@ -63,7 +61,7 @@
     .admin-header span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #F5A623; letter-spacing: 1px; }
     .admin-close { background: #F5A623; color: #111; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 16px; font-weight: 700; cursor: pointer; }
     .admin-tabs { display: flex; background: #141414; border-bottom: 1px solid #252525; }
-    .admin-tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; transition: color 0.15s; }
+    .admin-tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; }
     .admin-tab.active { color: #F5A623; border-bottom: 2px solid #F5A623; background: #181818; }
     .admin-content { padding: 1.25rem 1.5rem; overflow-y: auto; flex: 1; }
     .admin-section { display: none; }
@@ -72,7 +70,6 @@
     .af-inp, .af-sel, .af-ta { display: block; width: 100%; background: #222; border: 1px solid #444; border-radius: 8px; color: #F5A623; padding: 9px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 12px; box-sizing: border-box; }
     .af-sel { appearance: none; -webkit-appearance: none; }
     .af-ta { resize: vertical; min-height: 70px; }
-    .af-inp:focus, .af-sel:focus, .af-ta:focus { border-color: #F5A623; }
     .af-inp::placeholder { color: #444; }
     .admin-btn { display: block; width: 100%; background: #181818; color: #F5A623; border: 2px solid #F5A623; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
     .admin-btn:hover { background: #F5A623; color: #111; }
@@ -82,6 +79,7 @@
     .admin-item-del:hover { background: #c0392b; color: #fff; }
     .admin-sep { font-size: 11px; color: #F5A623; text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.75rem; padding-bottom: 6px; border-bottom: 1px solid #252525; font-weight: 500; }
     .empty-msg { color: #444; font-size: 13px; text-align: center; padding: 1.5rem; border: 1px dashed #2a2a2a; border-radius: 8px; }
+    .saving-indicator { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #F5A623; color: #111; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; z-index: 99999; }
     @media (max-width: 600px) {
       .about-grid, .lieux-grid, .contact-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 1rem; }
@@ -89,6 +87,8 @@
   </style>
 </head>
 <body>
+
+<div class="saving-indicator" id="savingIndicator">💾 Sauvegarde...</div>
 
 <nav>
   <a class="nav-logo" href="#">Meuh <span>Comedy</span></a>
@@ -117,7 +117,7 @@
 <section id="dates">
   <div class="section-label">Agenda</div>
   <h2>Prochaines dates</h2>
-  <div class="dates-grid" id="dates-list"></div>
+  <div class="dates-grid" id="dates-list"><div class="empty-msg">Chargement...</div></div>
   <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
 </section>
 
@@ -214,31 +214,85 @@
 </div>
 
 <script>
+const BIN_ID = '69dbb0b936566621a8a5fd9f';
+const API_KEY = '$2a$10$af1KclFEI4tzwUq2JWKCcu9X79FdelzAnjHsrNwug1/37SN8ICA/m';
+const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+const ADMIN_PW = 'meuh2025';
+const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+let isLoggedIn = false;
+let lieux = [];
+let events = [];
+let textes = {};
+
 function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
-const ADMIN_PW='meuh2025';
-const MONTHS=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
-let isLoggedIn=false;
-let lieux=[{nom:'Nebula',adresse:'2 Rue Saint-Melaine, Rennes'},{nom:'Little Beetles',adresse:'8 Rue Jean Sauveur, Rennes'},{nom:'Tête de Chou',adresse:'15 Rue Kléber, Rennes'},{nom:'Sketch',adresse:'36 Mail François Mitterrand, Rennes'}];
-let events=[];
-function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+async function loadData() {
+  try {
+    const res = await fetch(API_URL + '/latest', {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    const json = await res.json();
+    const data = json.record;
+    events = data.events || [];
+    lieux = data.lieux || [];
+    textes = data.textes || {};
+    applyTextes();
+    renderLieux();
+    renderDates();
+  } catch(e) {
+    console.error('Erreur chargement:', e);
+  }
+}
+
+async function saveData() {
+  const indicator = document.getElementById('savingIndicator');
+  indicator.style.display = 'block';
+  try {
+    await fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
+      body: JSON.stringify({ events, lieux, textes })
+    });
+    setTimeout(() => { indicator.style.display = 'none'; }, 1500);
+  } catch(e) {
+    indicator.textContent = '❌ Erreur sauvegarde';
+    setTimeout(() => { indicator.style.display = 'none'; indicator.textContent = '💾 Sauvegarde...'; }, 2000);
+  }
+}
+
+function applyTextes() {
+  if(textes.accroche) document.getElementById('txt-accroche').textContent = textes.accroche;
+  if(textes.openmics) document.getElementById('txt-openmics').textContent = textes.openmics;
+  if(textes.plateaux) document.getElementById('txt-plateaux').textContent = textes.plateaux;
+  if(textes.rennes) document.getElementById('txt-rennes').textContent = textes.rennes;
+  if(textes.tremplin) document.getElementById('txt-tremplin').textContent = textes.tremplin;
+}
+
 function openAdmin(){document.getElementById('adminOverlay').classList.add('open');if(!isLoggedIn){document.getElementById('adminLogin').style.display='block';document.getElementById('adminPanel').style.display='none';}else{showPanel();}}
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.getElementById('pwInput').value='';document.getElementById('pwErr').textContent='';}
 function checkPw(){if(document.getElementById('pwInput').value===ADMIN_PW){isLoggedIn=true;showPanel();}else{document.getElementById('pwErr').textContent='Mot de passe incorrect.';}}
 function showPanel(){document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='flex';refreshBarSelect();refreshAdminLieux();refreshAdminDates();loadTexteFields();}
 function switchTab(name){['dates','lieux','textes'].forEach(n=>{const btn=document.getElementById('tab-btn-'+n);const sec=document.getElementById('tab-'+n);const a=n===name;btn.classList.toggle('active',a);sec.classList.toggle('active',a);});}
+
 function renderLieux(){document.getElementById('lieux-list').innerHTML=lieux.map(l=>`<div class="lieu"><div class="lieu-dot"></div><div><div class="lieu-name">${l.nom}</div><div class="lieu-addr">${l.adresse}</div></div></div>`).join('');}
 function refreshBarSelect(){document.getElementById('f-bar').innerHTML='<option value="">— Choisir un bar —</option>'+lieux.map(l=>`<option value="${l.nom}" data-addr="${l.adresse}">${l.nom}</option>`).join('');}
 function refreshAdminLieux(){const list=document.getElementById('admin-lieux-list');if(!lieux.length){list.innerHTML='<div class="empty-msg">Aucun lieu.</div>';return;}list.innerHTML=lieux.map((l,i)=>`<div class="admin-item"><span style="color:#F5A623;font-weight:600;flex:0 0 auto;">${l.nom}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${l.adresse}</span><button class="admin-item-del" onclick="removeLieu(${i})">✕</button></div>`).join('');}
-function addLieu(){const nom=document.getElementById('l-nom').value.trim();const adresse=document.getElementById('l-adresse').value.trim();if(!nom){alert('Entrez un nom.');return;}lieux.push({nom,adresse});document.getElementById('l-nom').value='';document.getElementById('l-adresse').value='';renderLieux();refreshBarSelect();refreshAdminLieux();}
-function removeLieu(i){lieux.splice(i,1);renderLieux();refreshBarSelect();refreshAdminLieux();}
+function addLieu(){const nom=document.getElementById('l-nom').value.trim();const adresse=document.getElementById('l-adresse').value.trim();if(!nom){alert('Entrez un nom.');return;}lieux.push({nom,adresse});document.getElementById('l-nom').value='';document.getElementById('l-adresse').value='';renderLieux();refreshBarSelect();refreshAdminLieux();saveData();}
+function removeLieu(i){lieux.splice(i,1);renderLieux();refreshBarSelect();refreshAdminLieux();saveData();}
 function fillAddr(){const sel=document.getElementById('f-bar');document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||'';}
-function renderDates(){const list=document.getElementById('dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div style="color:#555;font-size:14px;text-align:center;padding:2rem;border:1px dashed #2a2a2a;border-radius:12px;">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;}list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join('');}
+
+function renderDates(){const list=document.getElementById('dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;}list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join('');}
 function refreshAdminDates(){const list=document.getElementById('admin-dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;}list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join('');}
-function addEvent(){const date=document.getElementById('f-date').value;const bar=document.getElementById('f-bar').value;const adresse=document.getElementById('f-adresse').value.trim();const heure=document.getElementById('f-heure').value.trim();const type=document.getElementById('f-type').value;const lien=document.getElementById('f-lien').value.trim();if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;}events.push({date,bar,adresse,heure,type,lien});document.getElementById('f-date').value='';document.getElementById('f-bar').value='';document.getElementById('f-adresse').value='';document.getElementById('f-heure').value='';document.getElementById('f-lien').value='';renderDates();refreshAdminDates();}
-function removeEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));events=events.filter(e=>e!==sorted[i]);renderDates();refreshAdminDates();}
-function loadTexteFields(){[['te-accroche','txt-accroche'],['te-openmics','txt-openmics'],['te-plateaux','txt-plateaux'],['te-rennes','txt-rennes'],['te-tremplin','txt-tremplin']].forEach(([f,e])=>{const el=document.getElementById(e);if(el)document.getElementById(f).value=el.textContent;});}
-function saveTextes(){[['te-accroche','txt-accroche'],['te-openmics','txt-openmics'],['te-plateaux','txt-plateaux'],['te-rennes','txt-rennes'],['te-tremplin','txt-tremplin']].forEach(([f,e])=>{const val=document.getElementById(f).value.trim();const el=document.getElementById(e);if(el&&val)el.textContent=val;});alert('✓ Textes mis à jour !');}
-renderLieux();renderDates();
+function addEvent(){const date=document.getElementById('f-date').value;const bar=document.getElementById('f-bar').value;const adresse=document.getElementById('f-adresse').value.trim();const heure=document.getElementById('f-heure').value.trim();const type=document.getElementById('f-type').value;const lien=document.getElementById('f-lien').value.trim();if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;}events.push({date,bar,adresse,heure,type,lien});document.getElementById('f-date').value='';document.getElementById('f-bar').value='';document.getElementById('f-adresse').value='';document.getElementById('f-heure').value='';document.getElementById('f-lien').value='';renderDates();refreshAdminDates();saveData();}
+function removeEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));events=events.filter(e=>e!==sorted[i]);renderDates();refreshAdminDates();saveData();}
+
+function loadTexteFields(){document.getElementById('te-accroche').value=textes.accroche||'';document.getElementById('te-openmics').value=textes.openmics||'';document.getElementById('te-plateaux').value=textes.plateaux||'';document.getElementById('te-rennes').value=textes.rennes||'';document.getElementById('te-tremplin').value=textes.tremplin||'';}
+function saveTextes(){textes.accroche=document.getElementById('te-accroche').value.trim();textes.openmics=document.getElementById('te-openmics').value.trim();textes.plateaux=document.getElementById('te-plateaux').value.trim();textes.rennes=document.getElementById('te-rennes').value.trim();textes.tremplin=document.getElementById('te-tremplin').value.trim();applyTextes();saveData();}
+
+loadData();
 </script>
 </body>
 </html>
