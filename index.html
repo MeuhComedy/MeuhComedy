@@ -17,32 +17,32 @@
     .nav-links a:hover { color: #F5A623; }
     .hero { padding: 5rem 2rem 4rem; text-align: center; border-bottom: 1px solid #222; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%); pointer-events: none; }
-    .hero-tag { display: inline-block; background: #F5A623; color: #111; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
+    .hero-tag { display: inline-block; background: var(--couleur-principale); color: #111; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
     .hero-sub { font-size: 16px; color: #888; margin: 1.5rem auto 2.5rem; max-width: 420px; line-height: 1.6; }
-    .btn { display: inline-block; background: #F5A623; color: #111; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 30px; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn { display: inline-block; background: var(--couleur-principale); color: #111; font-weight: 600; font-size: 14px; padding: 12px 28px; border-radius: 30px; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
     .btn-ghost { background: transparent; color: #fff; border: 1px solid #444; margin-left: 12px; }
     section { padding: 3.5rem 2rem; border-bottom: 1px solid #222; max-width: 860px; margin: 0 auto; }
-    .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #F5A623; font-weight: 500; margin-bottom: 0.5rem; }
+    .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--couleur-principale); font-weight: 500; margin-bottom: 0.5rem; }
     section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 2rem; color: #fff; }
     .dates-grid { display: flex; flex-direction: column; gap: 12px; }
     .date-card { display: flex; align-items: center; gap: 1.5rem; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1rem 1.25rem; text-decoration: none; color: inherit; transition: border-color 0.2s; }
-    .date-card:hover { border-color: #F5A623; }
-    .date-day { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #F5A623; line-height: 1; min-width: 48px; text-align: center; }
+    .date-card:hover { border-color: var(--couleur-principale); }
+    .date-day { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--couleur-principale); line-height: 1; min-width: 48px; text-align: center; }
     .date-month { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
     .date-sep { width: 1px; height: 36px; background: #2a2a2a; flex-shrink: 0; }
     .date-info { flex: 1; min-width: 0; }
     .date-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
     .date-venue { font-size: 13px; color: #666; }
-    .date-badge { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: #F5A623; color: #111; white-space: nowrap; flex-shrink: 0; }
+    .date-badge { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: var(--couleur-principale); color: #111; white-space: nowrap; flex-shrink: 0; }
     .date-badge.open-mic { background: transparent; border: 1px solid #444; color: #aaa; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .about-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1.25rem; }
     .about-icon { font-size: 24px; margin-bottom: 0.75rem; }
-    .about-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; color: #F5A623; }
+    .about-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; color: var(--couleur-principale); }
     .about-card p { font-size: 13px; color: #999; line-height: 1.6; }
     .lieux-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .lieu { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: flex-start; gap: 12px; }
-    .lieu-dot { width: 10px; height: 10px; border-radius: 50%; background: #F5A623; flex-shrink: 0; margin-top: 4px; }
+    .lieu-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--couleur-principale); flex-shrink: 0; margin-top: 4px; }
     .lieu-name { font-size: 14px; font-weight: 500; color: #fff; }
     .lieu-addr { font-size: 12px; color: #666; margin-top: 2px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -51,33 +51,38 @@
     .contact-card p { font-size: 14px; color: #ddd; }
     footer { padding: 2rem; text-align: center; font-size: 12px; color: #444; border-top: 1px solid #1a1a1a; }
     footer a { color: #666; text-decoration: none; margin: 0 8px; }
-    footer a:hover { color: #F5A623; }
+    footer a:hover { color: var(--couleur-principale); }
     .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; align-items: center; justify-content: center; }
     .admin-overlay.open { display: flex; }
-    .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 460px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
+    .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 480px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
     .admin-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #252525; display: flex; justify-content: space-between; align-items: center; }
-    .admin-header span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #F5A623; letter-spacing: 1px; }
-    .admin-close { background: #F5A623; color: #111; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 16px; font-weight: 700; cursor: pointer; }
+    .admin-header span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--couleur-principale); letter-spacing: 1px; }
+    .admin-close { background: var(--couleur-principale); color: #111; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 16px; font-weight: 700; cursor: pointer; }
     .admin-tabs { display: flex; background: #141414; border-bottom: 1px solid #252525; }
-    .admin-tab { flex: 1; padding: 11px 6px; text-align: center; font-size: 13px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; }
-    .admin-tab.active { color: #F5A623; border-bottom: 2px solid #F5A623; background: #181818; }
+    .admin-tab { flex: 1; padding: 11px 4px; text-align: center; font-size: 12px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; }
+    .admin-tab.active { color: var(--couleur-principale); border-bottom: 2px solid var(--couleur-principale); background: #181818; }
     .admin-content { padding: 1.25rem 1.5rem; overflow-y: auto; flex: 1; }
     .admin-section { display: none; }
     .admin-section.active { display: block; }
-    .af-lbl { font-size: 11px; color: #F5A623; display: block; margin-bottom: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
-    .af-inp, .af-sel, .af-ta { display: block; width: 100%; background: #222; border: 1px solid #444; border-radius: 8px; color: #F5A623; padding: 9px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 12px; box-sizing: border-box; }
+    .af-lbl { font-size: 11px; color: var(--couleur-principale); display: block; margin-bottom: 5px; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 500; }
+    .af-inp, .af-sel, .af-ta { display: block; width: 100%; background: #222; border: 1px solid #444; border-radius: 8px; color: var(--couleur-principale); padding: 9px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 12px; box-sizing: border-box; }
     .af-sel { appearance: none; -webkit-appearance: none; }
     .af-ta { resize: vertical; min-height: 70px; }
     .af-inp::placeholder { color: #444; }
-    .admin-btn { display: block; width: 100%; background: #181818; color: #F5A623; border: 2px solid #F5A623; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
-    .admin-btn:hover { background: #F5A623; color: #111; }
+    .admin-btn { display: block; width: 100%; background: #181818; color: var(--couleur-principale); border: 2px solid var(--couleur-principale); border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 4px; }
+    .admin-btn:hover { background: var(--couleur-principale); color: #111; }
     .admin-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
     .admin-item { background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
     .admin-item-del { background: #2a2a2a; border: none; color: #888; cursor: pointer; width: 26px; height: 26px; border-radius: 6px; font-size: 12px; flex-shrink: 0; }
     .admin-item-del:hover { background: #c0392b; color: #fff; }
-    .admin-sep { font-size: 11px; color: #F5A623; text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.75rem; padding-bottom: 6px; border-bottom: 1px solid #252525; font-weight: 500; }
+    .admin-sep { font-size: 11px; color: var(--couleur-principale); text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.75rem; padding-bottom: 6px; border-bottom: 1px solid #252525; font-weight: 500; }
     .empty-msg { color: #444; font-size: 13px; text-align: center; padding: 1.5rem; border: 1px dashed #2a2a2a; border-radius: 8px; }
-    .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #F5A623; color: #111; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; z-index: 99999; }
+    .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--couleur-principale); color: #111; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; z-index: 99999; }
+    .tag-item { display: flex; align-items: center; gap: 8px; background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; }
+    .tag-preview { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; background: var(--couleur-principale); color: #111; }
+    .color-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .color-row label { font-size: 12px; color: #aaa; flex: 1; }
+    .color-row input[type=color] { width: 44px; height: 36px; border: 1px solid #444; border-radius: 6px; background: #222; cursor: pointer; padding: 2px; }
     @media (max-width: 600px) {
       .about-grid, .lieux-grid, .contact-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 1rem; }
@@ -134,8 +139,8 @@
   <div class="section-label">Contact</div>
   <h2>Nous rejoindre</h2>
   <div class="contact-grid">
-    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
-    <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:#F5A623;font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:var(--couleur-principale);font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
+    <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:var(--couleur-principale);font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
   </div>
   <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
     <a href="https://instagram.com/meuhcomedy" target="_blank" class="btn" style="font-size:13px;padding:10px 22px;">Instagram</a>
@@ -170,19 +175,25 @@
         <button class="admin-tab active" id="tab-btn-dates" onclick="switchTab('dates')">📅 Dates</button>
         <button class="admin-tab" id="tab-btn-lieux" onclick="switchTab('lieux')">📍 Lieux</button>
         <button class="admin-tab" id="tab-btn-textes" onclick="switchTab('textes')">✏️ Textes</button>
+        <button class="admin-tab" id="tab-btn-tags" onclick="switchTab('tags')">🏷️ Tags</button>
+        <button class="admin-tab" id="tab-btn-couleurs" onclick="switchTab('couleurs')">🎨 Style</button>
       </div>
       <div class="admin-content">
+
+        <!-- DATES -->
         <div class="admin-section active" id="tab-dates">
           <div class="admin-list" id="admin-dates-list"></div>
-          <div class="admin-sep">Ajouter une date</div>
+          <div class="admin-sep">Ajouter / modifier une date</div>
           <span class="af-lbl">Date</span><input type="date" id="f-date" class="af-inp">
           <span class="af-lbl">Bar</span><select id="f-bar" class="af-sel" onchange="fillAddr()"><option value="">— Choisir un bar —</option></select>
           <span class="af-lbl">Adresse</span><input type="text" id="f-adresse" class="af-inp" readonly style="opacity:0.5;">
           <span class="af-lbl">Heure</span><input type="text" id="f-heure" class="af-inp" placeholder="ex: 20h">
-          <span class="af-lbl">Type</span><select id="f-type" class="af-sel"><option value="plateau">Plateau</option><option value="open-mic">Open Mic</option><option value="autre">Autre</option></select>
+          <span class="af-lbl">Type de soirée</span><select id="f-type" class="af-sel"></select>
           <span class="af-lbl">Lien billetterie</span><input type="text" id="f-lien" class="af-inp" placeholder="https://linktr.ee/meuhcomedy">
           <button class="admin-btn" id="add-event-btn" onclick="addEvent()">+ Ajouter cette date</button>
         </div>
+
+        <!-- LIEUX -->
         <div class="admin-section" id="tab-lieux">
           <div class="admin-list" id="admin-lieux-list"></div>
           <div class="admin-sep">Ajouter un lieu</div>
@@ -190,6 +201,8 @@
           <span class="af-lbl">Adresse</span><input type="text" id="l-adresse" class="af-inp" placeholder="ex: 2 Rue Saint-Melaine, Rennes">
           <button class="admin-btn" onclick="addLieu()">+ Ajouter ce lieu</button>
         </div>
+
+        <!-- TEXTES -->
         <div class="admin-section" id="tab-textes">
           <div class="admin-sep">Textes du site</div>
           <span class="af-lbl">Accroche (hero)</span><textarea id="te-accroche" class="af-ta"></textarea>
@@ -199,6 +212,34 @@
           <span class="af-lbl">Tremplin artistes</span><textarea id="te-tremplin" class="af-ta"></textarea>
           <button class="admin-btn" onclick="saveTextes()">💾 Sauvegarder les textes</button>
         </div>
+
+        <!-- TAGS -->
+        <div class="admin-section" id="tab-tags">
+          <div class="admin-sep">Types de soirée</div>
+          <div id="admin-tags-list"></div>
+          <div class="admin-sep">Ajouter un type</div>
+          <span class="af-lbl">Nom du type</span><input type="text" id="t-nom" class="af-inp" placeholder="ex: Showcase, Karaoké Comedy...">
+          <button class="admin-btn" onclick="addTag()">+ Ajouter ce type</button>
+        </div>
+
+        <!-- COULEURS -->
+        <div class="admin-section" id="tab-couleurs">
+          <div class="admin-sep">Personnalisation du style</div>
+          <div class="color-row">
+            <label>🎨 Couleur principale<br><small style="color:#555;">Boutons, accents, titres jaunes</small></label>
+            <input type="color" id="c-principale" value="#F5A623" onchange="applyColor()">
+          </div>
+          <div class="color-row">
+            <label>🌑 Fond du site<br><small style="color:#555;">Couleur de fond général</small></label>
+            <input type="color" id="c-fond" value="#111111" onchange="applyColor()">
+          </div>
+          <div class="color-row">
+            <label>🃏 Fond des cartes<br><small style="color:#555;">Dates, lieux, sections</small></label>
+            <input type="color" id="c-cartes" value="#1a1a1a" onchange="applyColor()">
+          </div>
+          <button class="admin-btn" onclick="saveCouleurs()">💾 Sauvegarder le style</button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -212,7 +253,7 @@ const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
 let isLoggedIn = false;
 let editingIndex = null;
-let events = [], lieux = [], textes = {};
+let events = [], lieux = [], textes = {}, tags = [], couleurs = {};
 
 const DEFAULT_LIEUX = [
   {nom:'Nebula', adresse:'2 Rue Saint-Melaine, Rennes'},
@@ -220,6 +261,8 @@ const DEFAULT_LIEUX = [
   {nom:'Tête de Chou', adresse:'15 Rue Kléber, Rennes'},
   {nom:'Sketch', adresse:'36 Mail François Mitterrand, Rennes'}
 ];
+const DEFAULT_TAGS = ['Plateau','Open Mic','Autre'];
+const DEFAULT_COULEURS = { principale: '#F5A623', fond: '#111111', cartes: '#1a1a1a' };
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -238,11 +281,18 @@ async function loadData() {
     events = d.events || [];
     lieux = d.lieux || DEFAULT_LIEUX;
     textes = d.textes || {};
+    tags = d.tags || DEFAULT_TAGS;
+    couleurs = d.couleurs || DEFAULT_COULEURS;
   } catch(e) {
     console.warn('JSONBin indisponible');
     lieux = DEFAULT_LIEUX;
+    tags = DEFAULT_TAGS;
+    couleurs = DEFAULT_COULEURS;
   }
-  applyTextes(); renderLieux(); renderDates();
+  applyCouleurs();
+  applyTextes();
+  renderLieux();
+  renderDates();
 }
 
 async function saveData() {
@@ -250,7 +300,7 @@ async function saveData() {
     await fetch(API_URL, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-      body: JSON.stringify({ events, lieux, textes })
+      body: JSON.stringify({ events, lieux, textes, tags, couleurs })
     });
     showToast('✓ Sauvegardé');
   } catch(e) {
@@ -258,6 +308,71 @@ async function saveData() {
   }
 }
 
+// COULEURS
+function applyCouleurs() {
+  document.documentElement.style.setProperty('--couleur-principale', couleurs.principale || '#F5A623');
+  document.body.style.background = couleurs.fond || '#111111';
+  document.querySelectorAll('.date-card, .about-card, .lieu, .contact-card').forEach(el => {
+    el.style.background = couleurs.cartes || '#1a1a1a';
+  });
+}
+
+function applyColor() {
+  couleurs.principale = document.getElementById('c-principale').value;
+  couleurs.fond = document.getElementById('c-fond').value;
+  couleurs.cartes = document.getElementById('c-cartes').value;
+  applyCouleurs();
+}
+
+function saveCouleurs() {
+  couleurs.principale = document.getElementById('c-principale').value;
+  couleurs.fond = document.getElementById('c-fond').value;
+  couleurs.cartes = document.getElementById('c-cartes').value;
+  applyCouleurs();
+  saveData();
+}
+
+function loadCouleurFields() {
+  document.getElementById('c-principale').value = couleurs.principale || '#F5A623';
+  document.getElementById('c-fond').value = couleurs.fond || '#111111';
+  document.getElementById('c-cartes').value = couleurs.cartes || '#1a1a1a';
+}
+
+// TAGS
+function refreshTagSelect() {
+  const sel = document.getElementById('f-type');
+  sel.innerHTML = tags.map(t => `<option value="${t}">${t}</option>`).join('');
+}
+
+function refreshAdminTags() {
+  const list = document.getElementById('admin-tags-list');
+  list.innerHTML = tags.map((t,i) => `
+    <div class="tag-item">
+      <span class="tag-preview">${t}</span>
+      <span style="flex:1;color:#777;font-size:13px;">${t}</span>
+      ${i >= 3 ? `<button class="admin-item-del" onclick="removeTag(${i})">✕</button>` : '<span style="color:#444;font-size:11px;">par défaut</span>'}
+    </div>`).join('');
+}
+
+function addTag() {
+  const nom = document.getElementById('t-nom').value.trim();
+  if(!nom) { alert('Entrez un nom.'); return; }
+  if(tags.includes(nom)) { alert('Ce type existe déjà.'); return; }
+  tags.push(nom);
+  document.getElementById('t-nom').value = '';
+  refreshAdminTags();
+  refreshTagSelect();
+  saveData();
+}
+
+function removeTag(i) {
+  tags.splice(i, 1);
+  refreshAdminTags();
+  refreshTagSelect();
+  saveData();
+}
+
+// TEXTES
 function applyTextes() {
   if(textes.accroche) document.getElementById('txt-accroche').textContent = textes.accroche;
   if(textes.openmics) document.getElementById('txt-openmics').textContent = textes.openmics;
@@ -266,22 +381,65 @@ function applyTextes() {
   if(textes.tremplin) document.getElementById('txt-tremplin').textContent = textes.tremplin;
 }
 
+function loadTexteFields() {
+  document.getElementById('te-accroche').value = textes.accroche || '';
+  document.getElementById('te-openmics').value = textes.openmics || '';
+  document.getElementById('te-plateaux').value = textes.plateaux || '';
+  document.getElementById('te-rennes').value = textes.rennes || '';
+  document.getElementById('te-tremplin').value = textes.tremplin || '';
+}
+
+function saveTextes() {
+  textes.accroche = document.getElementById('te-accroche').value.trim();
+  textes.openmics = document.getElementById('te-openmics').value.trim();
+  textes.plateaux = document.getElementById('te-plateaux').value.trim();
+  textes.rennes = document.getElementById('te-rennes').value.trim();
+  textes.tremplin = document.getElementById('te-tremplin').value.trim();
+  applyTextes(); saveData();
+}
+
+// ADMIN
 function openAdmin() { document.getElementById('adminOverlay').classList.add('open'); if(!isLoggedIn){document.getElementById('adminLogin').style.display='block';document.getElementById('adminPanel').style.display='none';}else{showPanel();} }
 function closeAdmin() { document.getElementById('adminOverlay').classList.remove('open'); document.getElementById('pwInput').value=''; document.getElementById('pwErr').textContent=''; }
 function checkPw() { if(document.getElementById('pwInput').value===ADMIN_PW){isLoggedIn=true;showPanel();}else{document.getElementById('pwErr').textContent='Mot de passe incorrect.';} }
-function showPanel() { document.getElementById('adminLogin').style.display='none'; document.getElementById('adminPanel').style.display='flex'; refreshBarSelect(); refreshAdminLieux(); refreshAdminDates(); loadTexteFields(); }
-function switchTab(name) { ['dates','lieux','textes'].forEach(n=>{ document.getElementById('tab-btn-'+n).classList.toggle('active',n===name); document.getElementById('tab-'+n).classList.toggle('active',n===name); }); }
+function showPanel() {
+  document.getElementById('adminLogin').style.display='none';
+  document.getElementById('adminPanel').style.display='flex';
+  refreshBarSelect(); refreshAdminLieux(); refreshAdminDates();
+  loadTexteFields(); refreshAdminTags(); refreshTagSelect(); loadCouleurFields();
+}
+function switchTab(name) { ['dates','lieux','textes','tags','couleurs'].forEach(n=>{ document.getElementById('tab-btn-'+n).classList.toggle('active',n===name); document.getElementById('tab-'+n).classList.toggle('active',n===name); }); }
 
+// LIEUX
 function renderLieux() { document.getElementById('lieux-list').innerHTML = lieux.map(l=>`<div class="lieu"><div class="lieu-dot"></div><div><div class="lieu-name">${l.nom}</div><div class="lieu-addr">${l.adresse}</div></div></div>`).join(''); }
 function refreshBarSelect() { document.getElementById('f-bar').innerHTML = '<option value="">— Choisir un bar —</option>'+lieux.map(l=>`<option value="${l.nom}" data-addr="${l.adresse}">${l.nom}</option>`).join(''); }
-function refreshAdminLieux() { const list=document.getElementById('admin-lieux-list'); if(!lieux.length){list.innerHTML='<div class="empty-msg">Aucun lieu.</div>';return;} list.innerHTML=lieux.map((l,i)=>`<div class="admin-item"><span style="color:#F5A623;font-weight:600;flex:0 0 auto;">${l.nom}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${l.adresse}</span><button class="admin-item-del" onclick="removeLieu(${i})">✕</button></div>`).join(''); }
+function refreshAdminLieux() { const list=document.getElementById('admin-lieux-list'); if(!lieux.length){list.innerHTML='<div class="empty-msg">Aucun lieu.</div>';return;} list.innerHTML=lieux.map((l,i)=>`<div class="admin-item"><span style="color:var(--couleur-principale);font-weight:600;flex:0 0 auto;">${l.nom}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${l.adresse}</span><button class="admin-item-del" onclick="removeLieu(${i})">✕</button></div>`).join(''); }
 function addLieu() { const nom=document.getElementById('l-nom').value.trim(); const adresse=document.getElementById('l-adresse').value.trim(); if(!nom){alert('Entrez un nom.');return;} lieux.push({nom,adresse}); document.getElementById('l-nom').value=''; document.getElementById('l-adresse').value=''; renderLieux(); refreshBarSelect(); refreshAdminLieux(); saveData(); }
 function removeLieu(i) { lieux.splice(i,1); renderLieux(); refreshBarSelect(); refreshAdminLieux(); saveData(); }
 function fillAddr() { const sel=document.getElementById('f-bar'); document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||''; }
 
-function renderDates() { const list=document.getElementById('dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;} list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join(''); }
+// DATES
+function renderDates() {
+  const list=document.getElementById('dates-list');
+  const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;}
+  list.innerHTML=sorted.map(ev=>{
+    const d=new Date(ev.date+'T12:00:00');
+    const isOpenMic = ev.type === 'Open Mic';
+    const badgeClass = isOpenMic ? 'open-mic' : '';
+    return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${ev.type} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${badgeClass}">${ev.type}</div></a>`;
+  }).join('');
+}
 
-function refreshAdminDates() { const list=document.getElementById('admin-dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;} list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="editEvent(${i})" style="background:#2a2a2a;border:none;color:#F5A623;cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:12px;margin-right:4px;">✏️</button><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join(''); }
+function refreshAdminDates() {
+  const list=document.getElementById('admin-dates-list');
+  const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;}
+  list.innerHTML=sorted.map((ev,i)=>{
+    const d=new Date(ev.date+'T12:00:00');
+    return`<div class="admin-item"><span style="color:var(--couleur-principale);font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="editEvent(${i})" style="background:#2a2a2a;border:none;color:var(--couleur-principale);cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:12px;margin-right:4px;">✏️</button><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;
+  }).join('');
+}
 
 function editEvent(i) {
   const sorted = [...events].sort((a,b) => new Date(a.date)-new Date(b.date));
@@ -320,9 +478,6 @@ function addEvent() {
 }
 
 function removeEvent(i) { const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); events=events.filter(e=>e!==sorted[i]); renderDates(); refreshAdminDates(); saveData(); }
-
-function loadTexteFields() { document.getElementById('te-accroche').value=textes.accroche||''; document.getElementById('te-openmics').value=textes.openmics||''; document.getElementById('te-plateaux').value=textes.plateaux||''; document.getElementById('te-rennes').value=textes.rennes||''; document.getElementById('te-tremplin').value=textes.tremplin||''; }
-function saveTextes() { textes.accroche=document.getElementById('te-accroche').value.trim(); textes.openmics=document.getElementById('te-openmics').value.trim(); textes.plateaux=document.getElementById('te-plateaux').value.trim(); textes.rennes=document.getElementById('te-rennes').value.trim(); textes.tremplin=document.getElementById('te-tremplin').value.trim(); applyTextes(); saveData(); }
 
 loadData();
 </script>
