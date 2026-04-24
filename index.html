@@ -278,14 +278,35 @@ function removeLieu(i) { lieux.splice(i,1); renderLieux(); refreshBarSelect(); r
 function fillAddr() { const sel=document.getElementById('f-bar'); document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||''; }
 
 function renderDates() { const list=document.getElementById('dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.</div>';return;} list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');const bc=ev.type==='open-mic'?'open-mic':'';const bl=ev.type==='plateau'?'Plateau':ev.type==='open-mic'?'Open Mic':'Soirée';return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${bl} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${bc}">${bl}</div></a>`;}).join(''); }
-function refreshAdminDates() { const list=document.getElementById('admin-dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;} list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join(''); }
-function addEvent() { const date=document.getElementById('f-date').value; const bar=document.getElementById('f-bar').value; const adresse=document.getElementById('f-adresse').value.trim(); const heure=document.getElementById('f-heure').value.trim(); const type=document.getElementById('f-type').value; const lien=document.getElementById('f-lien').value.trim(); if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;} events.push({date,bar,adresse,heure,type,lien}); document.getElementById('f-date').value=''; document.getElementById('f-bar').value=''; document.getElementById('f-adresse').value=''; document.getElementById('f-heure').value=''; document.getElementById('f-lien').value=''; renderDates(); refreshAdminDates(); saveData(); }
+function refreshAdminDates() { const list=document.getElementById('admin-dates-list'); const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;} list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:#F5A623;font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="editEvent(${i})" style="background:#2a2a2a;border:none;color:#F5A623;cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:12px;margin-right:4px;">✏️</button><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join(''); }
+if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;}
+  if(editingIndex !== null) {
+    events[editingIndex] = {date,bar,adresse,heure,type,lien};
+    editingIndex = null;
+    document.querySelector('#tab-dates .admin-btn').textContent = '+ Ajouter cette date';
+  } else {
+    events.push({date,bar,adresse,heure,type,lien});
+    renderDates(); refreshAdminDates(); saveData();
+  }
 function removeEvent(i) { const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date)); events=events.filter(e=>e!==sorted[i]); renderDates(); refreshAdminDates(); saveData(); }
 
 function loadTexteFields() { document.getElementById('te-accroche').value=textes.accroche||''; document.getElementById('te-openmics').value=textes.openmics||''; document.getElementById('te-plateaux').value=textes.plateaux||''; document.getElementById('te-rennes').value=textes.rennes||''; document.getElementById('te-tremplin').value=textes.tremplin||''; }
 function saveTextes() { textes.accroche=document.getElementById('te-accroche').value.trim(); textes.openmics=document.getElementById('te-openmics').value.trim(); textes.plateaux=document.getElementById('te-plateaux').value.trim(); textes.rennes=document.getElementById('te-rennes').value.trim(); textes.tremplin=document.getElementById('te-tremplin').value.trim(); applyTextes(); saveData(); }
 
 loadData();
+  let editingIndex = null;
+function editEvent(i) {
+  const sorted = [...events].sort((a,b) => new Date(a.date)-new Date(b.date));
+  const ev = sorted[i];
+  editingIndex = events.indexOf(ev);
+  document.getElementById('f-date').value = ev.date;
+  document.getElementById('f-bar').value = ev.bar;
+  document.getElementById('f-adresse').value = ev.adresse;
+  document.getElementById('f-heure').value = ev.heure;
+  document.getElementById('f-type').value = ev.type;
+  document.getElementById('f-lien').value = ev.lien || '';
+  document.querySelector('#tab-dates .admin-btn').textContent = '💾 Modifier cette date';
+}
 </script>
 </body>
 </html>
