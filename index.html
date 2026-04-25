@@ -10,8 +10,11 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #111; color: #fff; font-family: 'DM Sans', sans-serif; }
     nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; border-bottom: 1px solid #222; position: sticky; top: 0; background: #111; z-index: 100; }
-    .nav-logo { font-family: 'Boogaloo', cursive; font-size: 26px; color: #fff; letter-spacing: 1px; text-decoration: none; }
-    .nav-logo span { color: var(--couleur-principale); }
+    .nav-pages { display: flex; gap: 1rem; }
+    .nav-pages a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 20px; border-radius: 30px; transition: all 0.2s; }
+    .nav-pages a.plateau { background: var(--couleur-principale); color: #111; }
+    .nav-pages a.association { background: transparent; color: #aaa; border: 1px solid #333; }
+    .nav-pages a.association:hover { border-color: var(--couleur-principale); color: var(--couleur-principale); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: #aaa; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
     .nav-links a:hover { color: var(--couleur-principale); }
@@ -94,7 +97,10 @@
 <div class="toast" id="toast">✓ Sauvegardé</div>
 
 <nav>
-  <a class="nav-logo" href="#">Meuh <span>Comedy</span></a>
+  <div class="nav-pages">
+    <a href="index.html" class="plateau active">🎤 Plateau</a>
+    <a href="association.html" class="association">🏛️ Association</a>
+  </div>
   <ul class="nav-links">
     <li><a onclick="goTo('dates')">Dates</a></li>
     <li><a onclick="goTo('about')">Le projet</a></li>
