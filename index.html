@@ -11,10 +11,10 @@
     body { background: #111; color: #fff; font-family: 'DM Sans', sans-serif; }
     nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; border-bottom: 1px solid #222; position: sticky; top: 0; background: #111; z-index: 100; }
     .nav-logo { font-family: 'Boogaloo', cursive; font-size: 26px; color: #fff; letter-spacing: 1px; text-decoration: none; }
-    .nav-logo span { color: #F5A623; }
+    .nav-logo span { color: var(--couleur-principale); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: #aaa; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
-    .nav-links a:hover { color: #F5A623; }
+    .nav-links a:hover { color: var(--couleur-principale); }
     .hero { padding: 5rem 2rem 4rem; text-align: center; border-bottom: 1px solid #222; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%); pointer-events: none; }
     .hero-tag { display: inline-block; background: var(--couleur-principale); color: #111; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 1.5rem; }
@@ -114,7 +114,9 @@
 <section id="dates">
   <div class="section-label">Agenda</div>
   <h2>Prochaines dates</h2>
-  <div class="dates-grid" id="dates-list"></div>
+  <div class="dates-grid" id="dates-list">
+    <div class="empty-msg" style="color:#555;">⏳ Chargement des dates...</div>
+  </div>
   <p style="font-size:12px;color:#555;margin-top:1rem;">Entrée gratuite sur inscription via Billetweb</p>
 </section>
 
@@ -215,7 +217,7 @@
 
         <!-- TAGS -->
         <div class="admin-section" id="tab-tags">
-          <div class="admin-sep">Types de soirée</div>
+          <div class="admin-sep">Types de soirée existants</div>
           <div id="admin-tags-list"></div>
           <div class="admin-sep">Ajouter un type</div>
           <span class="af-lbl">Nom du type</span><input type="text" id="t-nom" class="af-inp" placeholder="ex: Showcase, Karaoké Comedy...">
@@ -226,7 +228,7 @@
         <div class="admin-section" id="tab-couleurs">
           <div class="admin-sep">Personnalisation du style</div>
           <div class="color-row">
-            <label>🎨 Couleur principale<br><small style="color:#555;">Boutons, accents, titres jaunes</small></label>
+            <label>🎨 Couleur principale<br><small style="color:#555;">Boutons, accents, titres</small></label>
             <input type="color" id="c-principale" value="#F5A623" onchange="applyColor()">
           </div>
           <div class="color-row">
@@ -238,6 +240,7 @@
             <input type="color" id="c-cartes" value="#1a1a1a" onchange="applyColor()">
           </div>
           <button class="admin-btn" onclick="saveCouleurs()">💾 Sauvegarder le style</button>
+          <button class="admin-btn" style="margin-top:8px;border-color:#555;color:#555;" onclick="resetCouleurs()">↺ Couleurs par défaut</button>
         </div>
 
       </div>
@@ -312,9 +315,7 @@ async function saveData() {
 function applyCouleurs() {
   document.documentElement.style.setProperty('--couleur-principale', couleurs.principale || '#F5A623');
   document.body.style.background = couleurs.fond || '#111111';
-  document.querySelectorAll('.date-card, .about-card, .lieu, .contact-card').forEach(el => {
-    el.style.background = couleurs.cartes || '#1a1a1a';
-  });
+  document.querySelectorAll('nav').forEach(el => el.style.background = couleurs.fond || '#111111');
 }
 
 function applyColor() {
@@ -330,6 +331,14 @@ function saveCouleurs() {
   couleurs.cartes = document.getElementById('c-cartes').value;
   applyCouleurs();
   saveData();
+}
+
+function resetCouleurs() {
+  couleurs = { principale: '#F5A623', fond: '#111111', cartes: '#1a1a1a' };
+  loadCouleurFields();
+  applyCouleurs();
+  saveData();
+  showToast('✓ Couleurs réinitialisées');
 }
 
 function loadCouleurFields() {
@@ -349,7 +358,7 @@ function refreshAdminTags() {
   list.innerHTML = tags.map((t,i) => `
     <div class="tag-item">
       <span class="tag-preview">${t}</span>
-      <span style="flex:1;color:#777;font-size:13px;">${t}</span>
+      <span style="flex:1;color:#777;font-size:13px;margin-left:8px;">${t}</span>
       ${i >= 3 ? `<button class="admin-item-del" onclick="removeTag(${i})">✕</button>` : '<span style="color:#444;font-size:11px;">par défaut</span>'}
     </div>`).join('');
 }
