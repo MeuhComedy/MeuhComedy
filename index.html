@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meuh Comedy — Stand-up Rennes</title>
-  <meta name="description" content="Meuh Comedy Rennais — Soirées stand-up à Rennes.">
+  <meta name="description" content="Meuh Comedy Rennais — Soirées stand-up à Rennes. Open mics et plateaux dans les meilleurs bars rennais. Entrée gratuite.">
+  <meta name="keywords" content="stand-up Rennes, open mic Rennes, comédie Rennes, humour Rennes, Meuh Comedy, spectacle vivant Rennes">
+  <meta property="og:title" content="Meuh Comedy — Stand-up Rennes">
+  <meta property="og:description" content="La scène stand-up de Rennes. Open mics et plateaux dans les meilleurs bars. Entrée gratuite.">
+  <meta property="og:url" content="https://meuhcomedy.netlify.app">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://meuhcomedy.netlify.app/og-image.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
   <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,6 +22,8 @@
     .nav-pages a { font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 20px; border-radius: 30px; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
     .nav-pages a.plateau { background: var(--cp, #F5A623); color: #111; }
     .nav-pages a.association { background: transparent; color: #aaa; border: 1px solid #333; }
+    .nav-pages a.artistes { background: transparent; color: #aaa; border: 1px solid #333; }
+    .nav-pages a.artistes:hover { border-color: var(--cp, #F5A623); color: var(--cp, #F5A623); }
     .nav-pages a.association:hover { border-color: var(--cp, #F5A623); color: var(--cp, #F5A623); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: #aaa; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; }
@@ -67,12 +77,12 @@
     footer a:hover { color: var(--cp, #F5A623); }
     .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; align-items: center; justify-content: center; }
     .admin-overlay.open { display: flex; }
-    .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 480px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
+    .admin-modal { background: #181818; border: 1px solid #333; border-radius: 16px; width: 520px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; }
     .admin-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #252525; display: flex; justify-content: space-between; align-items: center; }
     .admin-header span { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--cp, #F5A623); letter-spacing: 1px; }
     .admin-close { background: var(--cp, #F5A623); color: #111; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 16px; font-weight: 700; cursor: pointer; }
-    .admin-tabs { display: flex; background: #141414; border-bottom: 1px solid #252525; }
-    .admin-tab { flex: 1; padding: 11px 4px; text-align: center; font-size: 12px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; }
+    .admin-tabs { display: flex; background: #141414; border-bottom: 1px solid #252525; overflow-x: auto; }
+    .admin-tab { flex-shrink: 0; padding: 11px 8px; text-align: center; font-size: 11px; font-weight: 500; cursor: pointer; border: none; border-bottom: 2px solid transparent; font-family: 'DM Sans', sans-serif; color: #555; background: transparent; }
     .admin-tab.active { color: var(--cp, #F5A623); border-bottom: 2px solid var(--cp, #F5A623); background: #181818; }
     .admin-content { padding: 1.25rem 1.5rem; overflow-y: auto; flex: 1; }
     .admin-section { display: none; }
@@ -91,11 +101,14 @@
     .admin-sep { font-size: 11px; color: var(--cp, #F5A623); text-transform: uppercase; letter-spacing: 1px; margin: 1rem 0 0.75rem; padding-bottom: 6px; border-bottom: 1px solid #252525; font-weight: 500; }
     .empty-msg { color: #444; font-size: 13px; text-align: center; padding: 1.5rem; border: 1px dashed #2a2a2a; border-radius: 8px; }
     .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--cp, #F5A623); color: #111; padding: 8px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; z-index: 99999; }
-    .tag-item { display: flex; align-items: center; gap: 8px; background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; }
-    .tag-preview { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; background: var(--cp, #F5A623); color: #111; }
     .color-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
     .color-row label { font-size: 12px; color: #aaa; flex: 1; }
     .color-row input[type=color] { width: 44px; height: 36px; border: 1px solid #444; border-radius: 6px; background: #222; cursor: pointer; padding: 2px; }
+    .candidature-card { background: #1e1e1e; border: 1px solid #2e2e2e; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+    .candidature-date { font-size: 12px; color: var(--cp, #F5A623); font-weight: 600; margin-bottom: 6px; }
+    .candidature-artiste { font-size: 14px; color: #eee; font-weight: 500; }
+    .candidature-detail { font-size: 12px; color: #666; margin-top: 4px; }
+    .candidature-insta { color: var(--cp, #F5A623); text-decoration: none; font-size: 12px; }
     @media (max-width: 768px) {
       .about-grid, .lieux-grid, .contact-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
@@ -109,6 +122,7 @@
   <div class="nav-pages">
     <a href="index.html" class="plateau">🎤 Plateau</a>
     <a href="association.html" class="association">🏛️ Association</a>
+    <a href="artistes.html" class="artistes">🎤 Artistes</a>
   </div>
   <ul class="nav-links">
     <li><a onclick="goTo('dates')">Dates</a></li>
@@ -158,7 +172,7 @@
   <div class="section-label">Contact</div>
   <h2>Nous rejoindre</h2>
   <div class="contact-grid">
-    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:var(--cp,#F5A623);font-size:14px;">&#64;meuhcomedy</span></div>
+    <div class="contact-card"><h3>Tu veux monter sur scène ?</h3><p>On organise des open mics régulièrement. Tous les niveaux sont les bienvenus.</p><br><span style="color:var(--cp,#F5A623);font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
     <div class="contact-card"><h3>Tu veux rejoindre l'équipe ?</h3><p>Communication, technique, production — on construit une équipe et on cherche des gens motivés.</p><br><span style="color:var(--cp,#F5A623);font-size:14px;">meuhcomedy&#64;gmail.com</span></div>
   </div>
   <div style="margin-top:1rem;display:flex;gap:12px;flex-wrap:wrap;">
@@ -167,7 +181,11 @@
   </div>
 </section>
 <footer>
-  <p style="margin-bottom:8px;"><a href="https://instagram.com/meuhcomedy" target="_blank">Instagram</a><a href="https://linktr.ee/meuhcomedy" target="_blank">Billetterie</a></p>
+  <p style="margin-bottom:8px;">
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="https://instagram.com/meuhcomedy" target="_blank">Instagram</a>
+    <a href="https://linktr.ee/meuhcomedy" target="_blank">Billetterie</a>
+  </p>
   <p>© 2025 Meuh Comedy Rennais — Association loi 1901</p>
   <p style="margin-top:1rem;"><span onclick="openAdmin()" style="color:#151515;font-size:10px;cursor:pointer;user-select:none;">⚙</span></p>
 </footer>
@@ -185,11 +203,15 @@
       <div class="admin-tabs">
         <button class="admin-tab active" id="tab-btn-dates" onclick="switchTab('dates')">📅 Dates</button>
         <button class="admin-tab" id="tab-btn-lieux" onclick="switchTab('lieux')">📍 Lieux</button>
+        <button class="admin-tab" id="tab-btn-types" onclick="switchTab('types')">🎭 Types</button>
+        <button class="admin-tab" id="tab-btn-candidatures" onclick="switchTab('candidatures')">📬 Candidatures</button>
         <button class="admin-tab" id="tab-btn-textes" onclick="switchTab('textes')">✏️ Textes</button>
-        <button class="admin-tab" id="tab-btn-tags" onclick="switchTab('tags')">🏷️ Tags</button>
         <button class="admin-tab" id="tab-btn-couleurs" onclick="switchTab('couleurs')">🎨 Style</button>
+        <button class="admin-tab" id="tab-btn-mdp" onclick="switchTab('mdp')">🔑 MDP</button>
       </div>
       <div class="admin-content">
+
+        <!-- DATES -->
         <div class="admin-section active" id="tab-dates">
           <div class="admin-list" id="admin-dates-list"></div>
           <div class="admin-sep">Ajouter / modifier une date</div>
@@ -197,10 +219,14 @@
           <span class="af-lbl">Bar</span><select id="f-bar" class="af-sel" onchange="fillAddr()"><option value="">— Choisir un bar —</option></select>
           <span class="af-lbl">Adresse</span><input type="text" id="f-adresse" class="af-inp" readonly style="opacity:0.5;">
           <span class="af-lbl">Heure</span><input type="text" id="f-heure" class="af-inp" placeholder="ex: 20h">
-          <span class="af-lbl">Type de soirée</span><select id="f-type" class="af-sel"></select>
+          <span class="af-lbl">Type de soirée</span><select id="f-type" class="af-sel" onchange="fillTypeDesc()"><option value="">— Choisir un type —</option></select>
+          <span class="af-lbl">Description</span><textarea id="f-desc" class="af-ta" placeholder="Description automatique selon le type, modifiable"></textarea>
+          <span class="af-lbl">Heure RDV artistes</span><input type="text" id="f-rdv" class="af-inp" placeholder="ex: 19h30 (pour les artistes)">
           <span class="af-lbl">Lien billetterie</span><input type="text" id="f-lien" class="af-inp" placeholder="https://linktr.ee/meuhcomedy">
           <button class="admin-btn" id="add-event-btn" onclick="addEvent()">+ Ajouter cette date</button>
         </div>
+
+        <!-- LIEUX -->
         <div class="admin-section" id="tab-lieux">
           <div class="admin-list" id="admin-lieux-list"></div>
           <div class="admin-sep">Ajouter un lieu</div>
@@ -208,6 +234,23 @@
           <span class="af-lbl">Adresse</span><input type="text" id="l-adresse" class="af-inp" placeholder="ex: 2 Rue Saint-Melaine, Rennes">
           <button class="admin-btn" onclick="addLieu()">+ Ajouter ce lieu</button>
         </div>
+
+        <!-- TYPES -->
+        <div class="admin-section" id="tab-types">
+          <div class="admin-list" id="admin-types-list"></div>
+          <div class="admin-sep">Ajouter / modifier un type</div>
+          <span class="af-lbl">Nom du type</span><input type="text" id="ty-nom" class="af-inp" placeholder="ex: Open Mic, Plateau, 3×20...">
+          <span class="af-lbl">Description</span><textarea id="ty-desc" class="af-ta" placeholder="Description affichée aux artistes pour ce type de soirée"></textarea>
+          <button class="admin-btn" id="add-type-btn" onclick="addType()">+ Ajouter ce type</button>
+        </div>
+
+        <!-- CANDIDATURES -->
+        <div class="admin-section" id="tab-candidatures">
+          <div class="admin-sep">Candidatures reçues</div>
+          <div id="admin-candidatures-list"></div>
+        </div>
+
+        <!-- TEXTES -->
         <div class="admin-section" id="tab-textes">
           <div class="admin-sep">Textes du site</div>
           <span class="af-lbl">Accroche (hero)</span><textarea id="te-accroche" class="af-ta"></textarea>
@@ -217,69 +260,145 @@
           <span class="af-lbl">Tremplin artistes</span><textarea id="te-tremplin" class="af-ta"></textarea>
           <button class="admin-btn" onclick="saveTextes()">💾 Sauvegarder les textes</button>
         </div>
-        <div class="admin-section" id="tab-tags">
-          <div class="admin-sep">Types de soirée existants</div>
-          <div id="admin-tags-list"></div>
-          <div class="admin-sep">Ajouter un type</div>
-          <span class="af-lbl">Nom du type</span><input type="text" id="t-nom" class="af-inp" placeholder="ex: Showcase...">
-          <button class="admin-btn" onclick="addTag()">+ Ajouter ce type</button>
-        </div>
+
+        <!-- COULEURS -->
         <div class="admin-section" id="tab-couleurs">
           <div class="admin-sep">Personnalisation du style</div>
-          <div class="color-row"><label>🎨 Couleur principale<br><small style="color:#555;">Boutons, accents, titres</small></label><input type="color" id="c-principale" value="#F5A623" onchange="applyColor()"></div>
-          <div class="color-row"><label>🌑 Fond du site<br><small style="color:#555;">Couleur de fond général</small></label><input type="color" id="c-fond" value="#111111" onchange="applyColor()"></div>
-          <div class="color-row"><label>🃏 Fond des cartes<br><small style="color:#555;">Dates, lieux, sections</small></label><input type="color" id="c-cartes" value="#1a1a1a" onchange="applyColor()"></div>
+          <div class="color-row"><label>🎨 Couleur principale</label><input type="color" id="c-principale" value="#F5A623" onchange="applyColor()"></div>
+          <div class="color-row"><label>🌑 Fond du site</label><input type="color" id="c-fond" value="#111111" onchange="applyColor()"></div>
+          <div class="color-row"><label>🃏 Fond des cartes</label><input type="color" id="c-cartes" value="#1a1a1a" onchange="applyColor()"></div>
           <button class="admin-btn" onclick="saveCouleurs()">💾 Sauvegarder le style</button>
           <button class="admin-btn" style="margin-top:8px;border-color:#555;color:#555;" onclick="resetCouleurs()">↺ Couleurs par défaut</button>
         </div>
+
+        <!-- MOT DE PASSE -->
+        <div class="admin-section" id="tab-mdp">
+          <div class="admin-sep">Changer les mots de passe</div>
+          <span class="af-lbl">Nouveau MDP Admin</span>
+          <input type="password" id="new-mdp-admin" class="af-inp" placeholder="Nouveau mot de passe admin">
+          <button class="admin-btn" onclick="changeMdpAdmin()" style="margin-bottom:16px;">💾 Changer MDP Admin</button>
+          <span class="af-lbl">Nouveau MDP Artistes</span>
+          <input type="password" id="new-mdp-artistes" class="af-inp" placeholder="Nouveau mot de passe artistes">
+          <button class="admin-btn" onclick="changeMdpArtistes()">💾 Changer MDP Artistes</button>
+          <p id="mdp-msg" style="color:#F5A623;font-size:13px;margin-top:8px;"></p>
+          <p style="color:#555;font-size:12px;margin-top:12px;">⚠️ Après avoir changé un mot de passe, note-le bien — il est sauvegardé sur JSONBin.</p>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 <script>
-const ADMIN_PW='meuh2025';
 const BIN_ID='69dbb0b936566621a8a5fd9f';
 const API_KEY='$2a$10$af1KclFEI4tzwUq2JWKCcu9X79FdelzAnjHsrNwug1/37SN8ICA/m';
 const API_URL='https://api.jsonbin.io/v3/b/'+BIN_ID;
 const MONTHS=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
-let isLoggedIn=false,editingIndex=null,events=[],lieux=[],textes={},tags=[],couleurs={};
+const DEFAULT_ADMIN_PW='meuh2025';
+const DEFAULT_ARTISTES_PW='meuh_artistes';
+let isLoggedIn=false,editingIndex=null,editingTypeIndex=null;
+let events=[],lieux=[],textes={},types=[],couleurs={},candidatures=[],config={};
 const DL=[{nom:'Nebula',adresse:'2 Rue Saint-Melaine, Rennes'},{nom:'Little Beetles',adresse:'8 Rue Jean Sauveur, Rennes'},{nom:'Tête de Chou',adresse:'15 Rue Kléber, Rennes'},{nom:'Sketch',adresse:'36 Mail François Mitterrand, Rennes'}];
-const DT=['Plateau','Open Mic','Autre'];
+const DT=[{nom:'Open Mic',desc:'Soirée ouverte à tous les humoristes. Passages de 5 à 10 minutes.'},{nom:'Plateau',desc:'Soirée avec artistes sélectionnés. Passages de 20 minutes minimum.'},{nom:'3×20',desc:'3 artistes pour 20 minutes chacun, animé par un MC.'}];
 const DC={principale:'#F5A623',fond:'#111111',cartes:'#1a1a1a'};
+
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>{t.style.display='none';},1500);}
 function goTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
 function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
 function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
-async function loadData(){try{const r=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY}});const j=await r.json();const d=j.record;events=d.events||[];lieux=d.lieux||DL;textes=d.textes||{};tags=d.tags||DT;couleurs=d.couleurs||DC;}catch(e){lieux=DL;tags=DT;couleurs=DC;}applyCouleurs();applyTextes();renderLieux();renderDates();}
-async function saveData(){try{await fetch(API_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify({events,lieux,textes,tags,couleurs})});showToast('✓ Sauvegardé');}catch(e){showToast('❌ Erreur');}}
+
+function getAdminPw(){return config.adminPw||DEFAULT_ADMIN_PW;}
+function getArtistesPw(){return config.artistesPw||DEFAULT_ARTISTES_PW;}
+
+async function loadData(){
+  try{
+    const r=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY}});
+    const j=await r.json();const d=j.record;
+    events=d.events||[];lieux=d.lieux||DL;textes=d.textes||{};
+    types=d.types||DT;couleurs=d.couleurs||DC;
+    candidatures=d.candidatures||[];config=d.config||{};
+  }catch(e){lieux=DL;types=DT;couleurs=DC;}
+  applyCouleurs();applyTextes();renderLieux();renderDates();
+}
+
+async function saveData(){
+  try{
+    await fetch(API_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},
+    body:JSON.stringify({events,lieux,textes,types,couleurs,candidatures,config})});
+    showToast('✓ Sauvegardé');
+  }catch(e){showToast('❌ Erreur');}
+}
+
 function applyCouleurs(){document.documentElement.style.setProperty('--cp',couleurs.principale||'#F5A623');document.body.style.background=couleurs.fond||'#111111';document.querySelectorAll('nav').forEach(el=>el.style.background=couleurs.fond||'#111111');}
 function applyColor(){couleurs.principale=document.getElementById('c-principale').value;couleurs.fond=document.getElementById('c-fond').value;couleurs.cartes=document.getElementById('c-cartes').value;applyCouleurs();}
 function saveCouleurs(){couleurs.principale=document.getElementById('c-principale').value;couleurs.fond=document.getElementById('c-fond').value;couleurs.cartes=document.getElementById('c-cartes').value;applyCouleurs();saveData();}
 function resetCouleurs(){couleurs={principale:'#F5A623',fond:'#111111',cartes:'#1a1a1a'};loadCouleurFields();applyCouleurs();saveData();showToast('✓ Couleurs réinitialisées');}
 function loadCouleurFields(){document.getElementById('c-principale').value=couleurs.principale||'#F5A623';document.getElementById('c-fond').value=couleurs.fond||'#111111';document.getElementById('c-cartes').value=couleurs.cartes||'#1a1a1a';}
+
 function applyTextes(){if(textes.accroche)document.getElementById('txt-accroche').textContent=textes.accroche;if(textes.openmics)document.getElementById('txt-openmics').textContent=textes.openmics;if(textes.plateaux)document.getElementById('txt-plateaux').textContent=textes.plateaux;if(textes.rennes)document.getElementById('txt-rennes').textContent=textes.rennes;if(textes.tremplin)document.getElementById('txt-tremplin').textContent=textes.tremplin;}
 function loadTexteFields(){document.getElementById('te-accroche').value=textes.accroche||'';document.getElementById('te-openmics').value=textes.openmics||'';document.getElementById('te-plateaux').value=textes.plateaux||'';document.getElementById('te-rennes').value=textes.rennes||'';document.getElementById('te-tremplin').value=textes.tremplin||'';}
 function saveTextes(){textes.accroche=document.getElementById('te-accroche').value.trim();textes.openmics=document.getElementById('te-openmics').value.trim();textes.plateaux=document.getElementById('te-plateaux').value.trim();textes.rennes=document.getElementById('te-rennes').value.trim();textes.tremplin=document.getElementById('te-tremplin').value.trim();applyTextes();saveData();}
-function refreshTagSelect(){document.getElementById('f-type').innerHTML=tags.map(t=>`<option value="${t}">${t}</option>`).join('');}
-function refreshAdminTags(){document.getElementById('admin-tags-list').innerHTML=tags.map((t,i)=>`<div class="tag-item"><span class="tag-preview">${t}</span><span style="flex:1;color:#777;font-size:13px;margin-left:8px;">${t}</span>${i>=3?`<button class="admin-item-del" onclick="removeTag(${i})">✕</button>`:'<span style="color:#444;font-size:11px;">par défaut</span>'}</div>`).join('');}
-function addTag(){const n=document.getElementById('t-nom').value.trim();if(!n){alert('Entrez un nom.');return;}if(tags.includes(n)){alert('Existe déjà.');return;}tags.push(n);document.getElementById('t-nom').value='';refreshAdminTags();refreshTagSelect();saveData();}
-function removeTag(i){tags.splice(i,1);refreshAdminTags();refreshTagSelect();saveData();}
+
+function changeMdpAdmin(){const v=document.getElementById('new-mdp-admin').value.trim();if(!v){alert('Entrez un nouveau mot de passe.');return;}config.adminPw=v;document.getElementById('new-mdp-admin').value='';document.getElementById('mdp-msg').textContent='✓ MDP admin mis à jour';saveData();}
+function changeMdpArtistes(){const v=document.getElementById('new-mdp-artistes').value.trim();if(!v){alert('Entrez un nouveau mot de passe.');return;}config.artistesPw=v;document.getElementById('new-mdp-artistes').value='';document.getElementById('mdp-msg').textContent='✓ MDP artistes mis à jour';saveData();}
+
 function openAdmin(){document.getElementById('adminOverlay').classList.add('open');if(!isLoggedIn){document.getElementById('adminLogin').style.display='block';document.getElementById('adminPanel').style.display='none';}else{showPanel();}}
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.getElementById('pwInput').value='';document.getElementById('pwErr').textContent='';}
-function checkPw(){if(document.getElementById('pwInput').value===ADMIN_PW){isLoggedIn=true;showPanel();}else{document.getElementById('pwErr').textContent='Mot de passe incorrect.';}}
-function showPanel(){document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='flex';refreshBarSelect();refreshAdminLieux();refreshAdminDates();loadTexteFields();refreshAdminTags();refreshTagSelect();loadCouleurFields();}
-function switchTab(name){['dates','lieux','textes','tags','couleurs'].forEach(n=>{document.getElementById('tab-btn-'+n).classList.toggle('active',n===name);document.getElementById('tab-'+n).classList.toggle('active',n===name);});}
+function checkPw(){if(document.getElementById('pwInput').value===getAdminPw()){isLoggedIn=true;showPanel();}else{document.getElementById('pwErr').textContent='Mot de passe incorrect.';}}
+function showPanel(){document.getElementById('adminLogin').style.display='none';document.getElementById('adminPanel').style.display='flex';refreshBarSelect();refreshAdminLieux();refreshAdminDates();refreshTypeSelect();refreshAdminTypes();refreshAdminCandidatures();loadTexteFields();loadCouleurFields();}
+function switchTab(name){['dates','lieux','types','candidatures','textes','couleurs','mdp'].forEach(n=>{document.getElementById('tab-btn-'+n).classList.toggle('active',n===name);document.getElementById('tab-'+n).classList.toggle('active',n===name);});}
+
+// LIEUX
 function renderLieux(){document.getElementById('lieux-list').innerHTML=lieux.map(l=>`<div class="lieu"><div class="lieu-dot"></div><div><div class="lieu-name">${l.nom}</div><div class="lieu-addr">${l.adresse}</div></div></div>`).join('');}
 function refreshBarSelect(){document.getElementById('f-bar').innerHTML='<option value="">— Choisir un bar —</option>'+lieux.map(l=>`<option value="${l.nom}" data-addr="${l.adresse}">${l.nom}</option>`).join('');}
 function refreshAdminLieux(){const list=document.getElementById('admin-lieux-list');if(!lieux.length){list.innerHTML='<div class="empty-msg">Aucun lieu.</div>';return;}list.innerHTML=lieux.map((l,i)=>`<div class="admin-item"><span style="color:var(--cp);font-weight:600;flex:0 0 auto;">${l.nom}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${l.adresse}</span><button class="admin-item-del" onclick="removeLieu(${i})">✕</button></div>`).join('');}
 function addLieu(){const nom=document.getElementById('l-nom').value.trim();const adresse=document.getElementById('l-adresse').value.trim();if(!nom){alert('Entrez un nom.');return;}lieux.push({nom,adresse});document.getElementById('l-nom').value='';document.getElementById('l-adresse').value='';renderLieux();refreshBarSelect();refreshAdminLieux();saveData();}
 function removeLieu(i){lieux.splice(i,1);renderLieux();refreshBarSelect();refreshAdminLieux();saveData();}
 function fillAddr(){const sel=document.getElementById('f-bar');document.getElementById('f-adresse').value=sel.options[sel.selectedIndex].dataset.addr||'';}
-function renderDates(){const list=document.getElementById('dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date programmée.<br>Utilise le panneau Admin (⚙ en bas de page).</div>';return;}list.innerHTML=sorted.map(ev=>{const d=new Date(ev.date+'T12:00:00');return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${ev.type} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge ${ev.type==='Open Mic'?'open-mic':''}">${ev.type}</div></a>`;}).join('');}
+
+// TYPES
+function refreshTypeSelect(){const sel=document.getElementById('f-type');sel.innerHTML='<option value="">— Choisir un type —</option>'+types.map(t=>`<option value="${t.nom}">${t.nom}</option>`).join('');}
+function fillTypeDesc(){const nom=document.getElementById('f-type').value;const t=types.find(x=>x.nom===nom);document.getElementById('f-desc').value=t?t.desc:'';}
+function refreshAdminTypes(){const list=document.getElementById('admin-types-list');if(!types.length){list.innerHTML='<div class="empty-msg">Aucun type.</div>';return;}list.innerHTML=types.map((t,i)=>`<div class="admin-item" style="flex-direction:column;align-items:flex-start;gap:4px;"><div style="display:flex;width:100%;align-items:center;gap:8px;"><span style="color:var(--cp);font-weight:600;">${t.nom}</span><span style="flex:1;"></span><button class="admin-item-del" style="background:#2a2a2a;border:none;color:var(--cp);cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:12px;margin-right:4px;" onclick="editType(${i})">✏️</button><button class="admin-item-del" onclick="removeType(${i})">✕</button></div><div style="color:#666;font-size:12px;">${t.desc}</div></div>`).join('');}
+function addType(){const nom=document.getElementById('ty-nom').value.trim();const desc=document.getElementById('ty-desc').value.trim();if(!nom){alert('Entrez un nom.');return;}if(editingTypeIndex!==null){types[editingTypeIndex]={nom,desc};editingTypeIndex=null;document.getElementById('add-type-btn').textContent='+ Ajouter ce type';}else{types.push({nom,desc});}document.getElementById('ty-nom').value='';document.getElementById('ty-desc').value='';refreshAdminTypes();refreshTypeSelect();saveData();}
+function editType(i){editingTypeIndex=i;document.getElementById('ty-nom').value=types[i].nom;document.getElementById('ty-desc').value=types[i].desc;document.getElementById('add-type-btn').textContent='💾 Modifier ce type';}
+function removeType(i){types.splice(i,1);refreshAdminTypes();refreshTypeSelect();saveData();}
+
+// CANDIDATURES
+function refreshAdminCandidatures(){
+  const list=document.getElementById('admin-candidatures-list');
+  if(!candidatures.length){list.innerHTML='<div class="empty-msg">Aucune candidature reçue.</div>';return;}
+  const sorted=[...candidatures].sort((a,b)=>new Date(b.date_envoi)-new Date(a.date_envoi));
+  list.innerHTML=sorted.map((c,i)=>{
+    const ev=events.find(e=>e.date===c.date_soiree);
+    const d=new Date(c.date_soiree+'T12:00:00');
+    return`<div class="candidature-card">
+      <div class="candidature-date">📅 ${d.getDate()} ${MONTHS[d.getMonth()]} — ${ev?ev.type:'?'} à ${ev?ev.bar:'?'}</div>
+      <div class="candidature-artiste">${c.prenom} ${c.nom} <span style="color:#666;">·</span> <em style="color:#aaa;">${c.nom_artiste}</em></div>
+      <div class="candidature-detail">📍 ${c.ville} · <a class="candidature-insta" href="https://instagram.com/${c.insta.replace('@','')}" target="_blank">@${c.insta.replace('@','')}</a></div>
+      <div class="candidature-detail" style="margin-top:4px;">Reçue le ${new Date(c.date_envoi).toLocaleDateString('fr-FR')}</div>
+      <button class="admin-item-del" onclick="removeCandidature(${i})" style="margin-top:8px;width:auto;padding:4px 10px;font-size:11px;">Supprimer</button>
+    </div>`;
+  }).join('');
+}
+function removeCandidature(i){const sorted=[...candidatures].sort((a,b)=>new Date(b.date_envoi)-new Date(a.date_envoi));candidatures=candidatures.filter(c=>c!==sorted[i]);refreshAdminCandidatures();saveData();}
+
+// DATES - afficher seulement le mois en cours sur le plateau
+function renderDates(){
+  const list=document.getElementById('dates-list');
+  const now=new Date();
+  const mois=now.getMonth();const annee=now.getFullYear();
+  const filtered=events.filter(ev=>{const d=new Date(ev.date+'T12:00:00');return d.getMonth()===mois&&d.getFullYear()===annee;}).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  if(!filtered.length){list.innerHTML='<div class="empty-msg">Aucune date ce mois-ci.<br>Consulte la page artistes pour voir toutes les dates à venir.</div>';return;}
+  list.innerHTML=filtered.map(ev=>{const d=new Date(ev.date+'T12:00:00');return`<a href="${ev.lien||'#'}" target="_blank" class="date-card"><div><div class="date-day">${d.getDate()}</div><div class="date-month">${MONTHS[d.getMonth()]}</div></div><div class="date-sep"></div><div class="date-info"><div class="date-title">${ev.type} Meuh Comedy</div><div class="date-venue">${ev.bar} · ${ev.adresse} · ${ev.heure}</div></div><div class="date-badge">${ev.type}</div></a>`;}).join('');
+}
+
 function refreshAdminDates(){const list=document.getElementById('admin-dates-list');const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));if(!sorted.length){list.innerHTML='<div class="empty-msg">Aucune date.</div>';return;}list.innerHTML=sorted.map((ev,i)=>{const d=new Date(ev.date+'T12:00:00');return`<div class="admin-item"><span style="color:var(--cp);font-weight:600;">${d.getDate()} ${MONTHS[d.getMonth()]}</span><span style="color:#777;font-size:12px;flex:1;margin-left:8px;">${ev.bar} (${ev.type})</span><button class="admin-item-del" onclick="editEvent(${i})" style="background:#2a2a2a;border:none;color:var(--cp);cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:12px;margin-right:4px;">✏️</button><button class="admin-item-del" onclick="removeEvent(${i})">✕</button></div>`;}).join('');}
-function editEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));const ev=sorted[i];editingIndex=events.indexOf(ev);document.getElementById('f-date').value=ev.date;document.getElementById('f-bar').value=ev.bar;document.getElementById('f-adresse').value=ev.adresse;document.getElementById('f-heure').value=ev.heure;document.getElementById('f-type').value=ev.type;document.getElementById('f-lien').value=ev.lien||'';document.getElementById('add-event-btn').textContent='💾 Modifier cette date';}
-function addEvent(){const date=document.getElementById('f-date').value;const bar=document.getElementById('f-bar').value;const adresse=document.getElementById('f-adresse').value.trim();const heure=document.getElementById('f-heure').value.trim();const type=document.getElementById('f-type').value;const lien=document.getElementById('f-lien').value.trim();if(!date||!bar||!heure){alert('Date, bar et heure obligatoires.');return;}if(editingIndex!==null){events[editingIndex]={date,bar,adresse,heure,type,lien};editingIndex=null;document.getElementById('add-event-btn').textContent='+ Ajouter cette date';}else{events.push({date,bar,adresse,heure,type,lien});}document.getElementById('f-date').value='';document.getElementById('f-bar').value='';document.getElementById('f-adresse').value='';document.getElementById('f-heure').value='';document.getElementById('f-lien').value='';renderDates();refreshAdminDates();saveData();}
+
+function editEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));const ev=sorted[i];editingIndex=events.indexOf(ev);document.getElementById('f-date').value=ev.date;document.getElementById('f-bar').value=ev.bar;document.getElementById('f-adresse').value=ev.adresse;document.getElementById('f-heure').value=ev.heure;document.getElementById('f-type').value=ev.type;document.getElementById('f-desc').value=ev.desc||'';document.getElementById('f-rdv').value=ev.rdv||'';document.getElementById('f-lien').value=ev.lien||'';document.getElementById('add-event-btn').textContent='💾 Modifier cette date';}
+
+function addEvent(){const date=document.getElementById('f-date').value;const bar=document.getElementById('f-bar').value;const adresse=document.getElementById('f-adresse').value.trim();const heure=document.getElementById('f-heure').value.trim();const type=document.getElementById('f-type').value;const desc=document.getElementById('f-desc').value.trim();const rdv=document.getElementById('f-rdv').value.trim();const lien=document.getElementById('f-lien').value.trim();if(!date||!bar||!heure||!type){alert('Date, bar, heure et type obligatoires.');return;}if(editingIndex!==null){events[editingIndex]={date,bar,adresse,heure,type,desc,rdv,lien};editingIndex=null;document.getElementById('add-event-btn').textContent='+ Ajouter cette date';}else{events.push({date,bar,adresse,heure,type,desc,rdv,lien});}document.getElementById('f-date').value='';document.getElementById('f-bar').value='';document.getElementById('f-adresse').value='';document.getElementById('f-heure').value='';document.getElementById('f-type').value='';document.getElementById('f-desc').value='';document.getElementById('f-rdv').value='';document.getElementById('f-lien').value='';renderDates();refreshAdminDates();saveData();}
 function removeEvent(i){const sorted=[...events].sort((a,b)=>new Date(a.date)-new Date(b.date));events=events.filter(e=>e!==sorted[i]);renderDates();refreshAdminDates();saveData();}
+
 loadData();
 </script>
 </body>
